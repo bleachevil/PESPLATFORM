@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}{{ mode_label }} teams{% endblock %}
+{% block content %}
+<h1>{{ mode_label }} teams</h1>
+<p class="lede">
+  {% if mode == 'authentic' %}
+  Club and national-team squads using Authentic ratings.
+  {% else %}
+  Clubs that appear on Dream Team cards, including featured versions.
+  {% endif %}
+</p>
+{% for league, club_list in leagues.items() %}
+<h2>{{ league }}</h2>
+<div class="card-grid">
+  {% for team in club_list %}
+  <a class="pack-card" href="/teams/{{ team.slug }}">
+    <span class="eyebrow">{{ team.region }}</span>
+    <strong>{{ team.name }}</strong>
+    <span class="meta">{{ team.player_count }} players · avg {{ team.avg_ovr }} · top {{ team.top_ovr }}</span>
+  </a>
+  {% endfor %}
+</div>
+{% else %}
+<p class="empty">No teams in {{ mode_label }}. <a href="/import">Import players with a Club column</a>.</p>
+{% endfor %}
+{% endblock %}

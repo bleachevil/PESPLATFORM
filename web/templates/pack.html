@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}{{ pack.name }}{% endblock %}
+{% block content %}
+<p class="eyebrow">{{ pack.kind }}</p>
+<h1>{{ pack.name }}</h1>
+<p class="lede">{{ players|length }} players{% if pack.released_on %} · {{ pack.released_on }}{% endif %}</p>
+<div class="card-grid">
+  {% for p in players %}
+  <a class="player-card" href="/players/{{ p.slug }}">
+    <img class="face" src="{{ p.image_url }}" alt="{{ p.name }} card">
+    <span class="pos">{{ p.position }}</span>
+    <strong>{{ p.name }}</strong>
+    <span class="meta">{{ p.club }} · {{ p.card_type }}</span>
+    <span class="ovr">{{ p.overall }}</span>
+  </a>
+  {% endfor %}
+</div>
+{% if not players %}
+<p class="empty">This pack has no players.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block title %}Player market{% endblock %}
+{% block content %}
+<p class="eyebrow">{{ league.name if league else "No league selected" }}</p>
+<h1>Player market</h1>
+<p class="lede">Standard cards only by default. Status and price are for this league. Sign here, then play in eFootball.</p>
+{% if sea_window %}
+<p class="notice ok">Signing is open: {{ sea_window.title }}</p>
+{% elif new_manager %}
+<p class="notice ok">Signing is closed for the league, but a new club can still build a first squad (up to 16).</p>
+{% elif next_sign_window %}
+<p class="notice">Signing is closed until {{ next_sign_window.title }} ({{ next_sign_window.starts_at }} – {{ next_sign_window.ends_at }}).</p>
+{% elif league %}
+<p class="notice">Signing is closed. New clubs can still build a first squad.</p>
+{% endif %}
+{% if message %}<p class="notice ok">{{ message }}</p>{% endif %}
+{% if error %}<p class="notice err">{{ error }}</p>{% endif %}
+{% if not league %}
+<p class="empty">Pick a <a href="/leagues">league</a> first so every card shows Available, Signed, or In the sea.</p>
+{% endif %}
+
+<form class="filters" method="get" action="/market">
+  <input type="search" name="q" value="{{ q }}" placeholder="Name, club, nationality, pack">
+  <select name="position">
+    <option value="">All positions</option>
+    {% for pos in positions %}
+    <option value="{{ pos }}" {% if position == pos %}selected{% endif %}>{{ pos }}</option>
+    {% endfor %}
+  </select>
+  <input type="number" name="min_ovr" value="{{ min_ovr }}" placeholder="Min OVR" min="40" max="120">
+  <select name="card_type">
+    <option value="Standard" {% if card_type == 'Standard' %}selected{% endif %}>Standard only</option>
+    <option value="" {% if not card_type %}selected{% endif %}>All cards</option>
+    {% for kind in card_types %}
+    {% if kind != 'Standard' %}
+    <option value="{{ kind }}" {% if card_type == kind %}selected{% endif %}>{{ kind }}</option>
+    {% endif %}
+    {% endfor %}
+  </select>
+  <select name="status">
+    <option value="" {% if not status %}selected{% endif %}>Any status</option>
+    <option value="free" {% if status == 'free' %}selected{% endif %}>Available</option>
+    <option value="sea" {% if status == 'sea' %}selected{% endif %}>In the sea</option>
+    <option value="signed" {% if status == 'signed' %}selected{% endif %}>Signed</option>
+  </select>
+  <button type="submit">Filter</button>
+</form>
+
+<p class="count">{{ players|length }} players shown</p>
+<table class="players">
+  <thead>
+    <tr>
+      <th>Pos</th>
+      <th>Player</th>
+      <th>OVR</th>
+      <th>Price</th>
+      <th>Status</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for p in players %}
+    <tr>
+      <td><span class="pos sm">{{ p.position }}</span></td>
+      <td>
+        <a class="name-with-face" href="/players/{{ p.slug }}">
+          <img class="face sm" src="{{ p.image_url }}" alt="">
+          {{ p.name }}
+        </a>
+        <span class="card-type">{{ p.card_type }}{% if p.pack_name %} · {{ p.pack_name }}{% endif %}</span>
+      </td>
+      <td class="num">{{ p.overall }}</td>
+      <td class="num">{{ p.market_price }}M</td>
+      <td><span class="status {{ p.market_status.code }}">{{ p.market_status.label }}</span></td>
+      <td>
+        {% if my_team and p.market_status.code == 'free' and can_sign_free %}
+        <form action="/market/sign" method="post" class="upload">
+          <input type="hidden" name="pid" value="{{ p.pid }}">
+          <button type="submit">Sign</button>
+        </form>
+        {% elif my_team and p.market_status.code == 'sea' and sea_window %}
+        <form action="/market/sign" method="post" class="upload">
+          <input type="hidden" name="pid" value="{{ p.pid }}">
+          <button type="submit">Sign</button>
+        </form>
+        {% elif my_team and p.market_status.code == 'signed' and p.market_status.release_clause and clause_window %}
+        <form action="/market/buyout" method="post" class="upload">
+          <input type="hidden" name="pid" value="{{ p.pid }}">
+          <button type="submit">Buyout {{ p.market_status.release_clause }}M</button>
+        </form>
+        {% endif %}
+      </td>
+    </tr>
+    {% else %}
+    <tr><td colspan="6" class="empty">No players match. Search a name from the league sheet.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

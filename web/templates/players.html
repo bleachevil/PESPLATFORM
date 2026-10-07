@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %}{{ mode_label }} players{% endblock %}
+{% block content %}
+<h1>{{ mode_label }} players</h1>
+<p class="lede">Standard cards only by default. Switch the card filter if you need featured or special packs.</p>
+<form class="filters" method="get" action="/players">
+  <input type="search" name="q" value="{{ q }}" placeholder="Name, club, nationality, pack">
+  <select name="position">
+    <option value="">All positions</option>
+    {% for pos in positions %}
+    <option value="{{ pos }}" {% if position == pos %}selected{% endif %}>{{ pos }}</option>
+    {% endfor %}
+  </select>
+  <input type="number" name="min_ovr" value="{{ min_ovr }}" placeholder="Min OVR" min="40" max="120">
+  <select name="card_type">
+    <option value="Standard" {% if card_type == 'Standard' %}selected{% endif %}>Standard only</option>
+    <option value="" {% if not card_type %}selected{% endif %}>All cards</option>
+    {% for kind in card_types %}
+    {% if kind != 'Standard' %}
+    <option value="{{ kind }}" {% if card_type == kind %}selected{% endif %}>{{ kind }}</option>
+    {% endif %}
+    {% endfor %}
+  </select>
+  <input type="text" name="skill" value="{{ skill }}" placeholder="Skill contains">
+  <select name="sort">
+    <option value="overall" {% if sort == 'overall' %}selected{% endif %}>Overall</option>
+    <option value="name" {% if sort == 'name' %}selected{% endif %}>Name</option>
+  </select>
+  <button type="submit">Filter</button>
+</form>
+
+<p class="count">
+  {{ players|length }} players
+  · <a href="/players.csv?{{ urlencode(q=q, position=position, min_ovr=min_ovr, skill=skill, sort=sort, card_type=card_type) }}">Download CSV</a>
+  · <a href="/players.csv?all_modes=1">All modes</a>
+</p>
+<table class="players">
+  <thead>
+    <tr>
+      <th>Pos</th>
+      <th>Player</th>
+      <th>Club</th>
+      <th>{% if mode == 'dream-team' %}Pack{% else %}Nation{% endif %}</th>
+      <th>OVR</th>
+      <th>MAX</th>
+      <th>Max Lv</th>
+      {% if league %}
+      <th>Price</th>
+      <th>Status</th>
+      {% endif %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for p in players %}
+    <tr>
+      <td><span class="pos sm">{{ p.position }}</span></td>
+      <td>
+        <a class="name-with-face" href="/players/{{ p.slug }}">
+          <img class="face sm" src="{{ p.image_url }}" alt="">
+          {{ p.name }}
+        </a>
+        <span class="card-type">{{ p.card_type }}</span>
+      </td>
+      <td>{% if p.team_slug %}<a href="/teams/{{ p.team_slug }}">{{ p.club }}</a>{% else %}{{ p.club }}{% endif %}</td>
+      <td>
+        {% if mode == 'dream-team' and p.pack_name %}
+        <a href="/packs/{{ p.pack_slug }}">{{ p.pack_name }}</a>
+        {% else %}
+        {{ p.nationality }}
+        {% endif %}
+      </td>
+      <td class="num">{{ p.overall }}</td>
+      <td class="num dim">{{ p.max_overall }}{% if p.ovr_gain %} <span class="stat-incr">+{{ p.ovr_gain }}</span>{% endif %}</td>
+      <td class="num dim">{{ p.level }}/{{ p.max_level }}</td>
+      {% if league %}
+      <td class="num">{{ p.market_price }}M</td>
+      <td><span class="status {{ p.market_status.code }}">{{ p.market_status.label }}</span></td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% if not players %}
+<p class="empty">No matches in {{ mode_label }}. Try the other database or <a href="/import">import players</a>.</p>
+{% endif %}
+{% endblock %}

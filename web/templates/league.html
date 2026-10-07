@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+{% block title %}{{ league.name }}{% endblock %}
+{% block content %}
+<p class="eyebrow">Manager league</p>
+<h1>{{ league.name }}</h1>
+<p class="lede">{{ league.weeks or 6 }} weeks · {{ league.start_on }} → {{ league.end_on }} · {{ teams|length }}/{{ league.max_teams }} players</p>
+{% if message %}<p class="notice ok">{{ message }}</p>{% endif %}
+{% if error %}<p class="notice err">{{ error }}</p>{% endif %}
+
+{% if opens %}
+<p class="notice ok">Open now: <strong>{{ opens | map(attribute='title') | join(' · ') }}</strong></p>
+{% elif next_sign_window %}
+<p class="notice">No window is open. Next signing period: {{ next_sign_window.title }} ({{ next_sign_window.starts_at }}).</p>
+{% endif %}
+
+<div class="chips">
+  <a class="btn" href="/market">Player market</a>
+  {% if my_team %}<a class="btn secondary" href="/squad">My squad · {{ my_team.name }} ({{ my_team.budget }}M)</a>{% endif %}
+  {% if can_manage %}<a class="btn secondary" href="/league/{{ league.slug }}/organize">Manage league</a>{% endif %}
+  {% if user and not my_team and my_request and my_request.kind == 'invite' %}
+  <form action="/league/{{ league.slug }}/invite/accept" method="post" class="upload">
+    <button type="submit">Accept invitation · {{ my_request.team_name }}</button>
+  </form>
+  {% elif user and not my_team and my_request %}
+  <span class="status sea">Join request waiting for approval</span>
+  {% elif user and not my_team %}
+  <form action="/league/{{ league.slug }}/join" method="post" class="upload">
+    <input type="text" name="team_name" placeholder="Club name" required>
+    <button type="submit">Ask to join</button>
+  </form>
+  {% endif %}
+</div>
+
+<article class="calendar-panel">
+  <h2>{% if current %}{{ current.name }}{% else %}League table{% endif %}</h2>
+  {% include "standings.html" %}
+</article>
+
+<section class="import-grid">
+  <article>
+    <h2>Results</h2>
+    <table class="players">
+      <thead><tr><th>When</th><th>Home</th><th>Score</th><th>Away</th></tr></thead>
+      <tbody>
+      {% for m in results %}
+        <tr>
+          <td>{{ m.kickoff or "—" }}</td>
+          <td>{{ m.home_label }}</td>
+          <td class="num">{{ m.score_label }}</td>
+          <td>{{ m.away_label }}</td>
+        </tr>
+      {% else %}
+        <tr><td colspan="4" class="empty">No results yet.</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </article>
+  <article>
+    <h2>Matches</h2>
+    <table class="players">
+      <thead><tr><th>When</th><th>Home</th><th></th><th>Away</th></tr></thead>
+      <tbody>
+      {% for m in upcoming %}
+        <tr>
+          <td>{{ m.kickoff or "—" }}</td>
+          <td>{{ m.home_label }}</td>
+          <td class="num">VS</td>
+          <td>{{ m.away_label }}</td>
+        </tr>
+        {% if can_manage %}
+        <tr>
+          <td colspan="4">
+            <form action="/league/{{ league.slug }}/fixtures/{{ m.id }}/result" method="post" class="upload">
+              <input type="number" name="home_goals" min="0" placeholder="Home" required>
+              <input type="number" name="away_goals" min="0" placeholder="Away" required>
+              <button type="submit">Save result</button>
+            </form>
+          </td>
+        </tr>
+        {% endif %}
+      {% else %}
+        <tr><td colspan="4" class="empty">No upcoming matches.</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    {% if can_manage and current %}
+    <form action="/league/{{ league.slug }}/competitions/{{ current.id }}/match" method="post" class="stack-form">
+      <label>Home
+        <select name="home_team_id" required>
+          {% for t in teams %}<option value="{{ t.id }}">{{ t.manager_name }} - {{ t.name }}</option>{% endfor %}
+        </select>
+      </label>
+      <label>Away
+        <select name="away_team_id" required>
+          {% for t in teams %}<option value="{{ t.id }}">{{ t.manager_name }} - {{ t.name }}</option>{% endfor %}
+        </select>
+      </label>
+      <label>Kickoff
+        <input type="datetime-local" name="kickoff" required>
+      </label>
+      <button type="submit">Add one-off match</button>
+    </form>
+    <form action="/league/{{ league.slug }}/competitions/{{ current.id }}/fixtures" method="post" class="upload">
+      <button type="submit" class="secondary">Build home-and-away fixtures</button>
+    </form>
+    {% endif %}
+  </article>
+</section>
+
+<section class="import-grid">
+  <article>
+    <h2>Clubs</h2>
+    <table class="players">
+      <thead><tr><th>Club</th><th>Manager</th><th>Budget</th><th>Squad</th></tr></thead>
+      <tbody>
+      {% for t in teams %}
+        <tr>
+          <td>{{ t.name }}</td>
+          <td>{{ t.manager_name }}</td>
+          <td class="num">{{ t.budget }}M</td>
+          <td class="num">{{ t.squad_count }}</td>
+        </tr>
+      {% else %}
+        <tr><td colspan="4" class="empty">No approved clubs yet.</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </article>
+  <article>
+    <h2>Season</h2>
+    <p class="dim">First half, mid-season transfer, second half, then the end-of-season window. Hosts can open a cup, Champions League, and one-off events.</p>
+  </article>
+</section>
+
+<article class="calendar-panel">
+  <h2>Season calendar</h2>
+  {% include "calendar_table.html" %}
+</article>
+
+{% if inbox %}
+<h2>Incoming offers</h2>
+<table class="players">
+  <thead><tr><th>Player</th><th>From</th><th>Fee</th><th>Kind</th><th></th></tr></thead>
+  <tbody>
+  {% for o in inbox %}
+    <tr>
+      <td>{{ o.player_name }}</td>
+      <td>{{ o.from_name }}</td>
+      <td class="num">{{ o.fee }}M</td>
+      <td>{{ o.kind }}</td>
+      <td>
+        <form action="/offers/{{ o.id }}/decide" method="post" class="upload">
+          <button type="submit" name="accept" value="1">Accept</button>
+          <button type="submit" name="accept" value="0" class="secondary">Reject</button>
+        </form>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+{% endblock %}

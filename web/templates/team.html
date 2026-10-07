@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}{{ team.name }}{% endblock %}
+{% block content %}
+<p class="eyebrow">{{ team.league }} · {{ team.region }} · {{ mode_label }}</p>
+<h1>{{ team.name }}</h1>
+<p class="lede">{{ squad|length }} players in the {{ mode_label }} database.</p>
+{% if other_count %}
+<p><a class="btn secondary" href="/mode/{{ other_mode }}?next=/teams/{{ team.slug }}">View {{ other_mode_label }} squad ({{ other_count }})</a></p>
+{% endif %}
+
+{% if squad %}
+{% for group in grouped %}
+{% if group.players %}
+<h2>{{ group.label }}</h2>
+<table class="players">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Pos</th>
+      <th>Player</th>
+      <th>Card</th>
+      <th>OVR</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for p in group.players %}
+    <tr>
+      <td class="num dim">{{ p.squad_number or "—" }}</td>
+      <td><span class="pos sm">{{ p.position }}</span></td>
+      <td>
+        <a class="name-with-face" href="/players/{{ p.slug }}">
+          <img class="face sm" src="{{ p.image_url }}" alt="">
+          {{ p.name }}
+        </a>
+        {% if p.pack_name %}<span class="card-type">{{ p.pack_name }}</span>{% endif %}
+      </td>
+      <td>{{ p.card_type }}</td>
+      <td class="num">{{ p.overall }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+{% endfor %}
+{% else %}
+<p class="empty">No {{ mode_label }} players at this club.
+  {% if other_count %}<a href="/mode/{{ other_mode }}?next=/teams/{{ team.slug }}">Open the {{ other_mode_label }} squad</a>.{% endif %}
+</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Manager Desk{% endblock %} · PES Data</title>
+  <link rel="stylesheet" href="/static/app.css?v=8">
+  {% block extra_head %}{% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+  <header class="top">
+    <a class="brand" href="/">Manager Desk</a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/leagues">Leagues</a>
+      <a href="/market">Market</a>
+      {% if my_team %}<a href="/squad">Squad</a>{% endif %}
+      <a href="/players">Catalog</a>
+    </nav>
+    <form class="quick-search" action="/market" method="get">
+      <input type="search" name="q" placeholder="Find a player to sign" value="{{ q|default('') }}">
+      <button type="submit">Search</button>
+    </form>
+    <div class="account">
+      {% if league %}<a class="league-chip" href="/league/{{ league.slug }}">{{ league.name }}</a>{% endif %}
+      {% if user %}
+      <span class="dim">{{ user.name }}{% if my_team %} · {{ my_team.budget }}M{% endif %}</span>
+      <a href="/logout">Sign out</a>
+      {% else %}
+      <a href="/login">Sign in with Google</a>
+      {% endif %}
+    </div>
+  </header>
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+  <footer>
+    Manager league for eFootball. Play the match in-game; sign contracts, transfers, and windows here.
+    Not affiliated with KONAMI.
+  </footer>
+</body>
+</html>

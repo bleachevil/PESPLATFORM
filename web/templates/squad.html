@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}{{ my_team.name }} squad{% endblock %}
+{% block content %}
+<p class="eyebrow">{{ league.name }}</p>
+<h1>{{ my_team.name }}</h1>
+<p class="lede">Budget {{ my_team.budget }}M · {{ players|length }} contracted players. After a first squad of 16, sign only in the winter/summer sea windows.</p>
+{% if opens %}
+<p class="notice ok">Open: {{ opens | map(attribute='title') | join(' · ') }}</p>
+{% endif %}
+{% if message %}<p class="notice ok">{{ message }}</p>{% endif %}
+{% if error %}<p class="notice err">{{ error }}</p>{% endif %}
+
+<table class="players">
+  <thead>
+    <tr>
+      <th>Pos</th><th>Player</th><th>OVR</th><th>Fee</th><th>Clause</th><th></th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for p in players %}
+    <tr>
+      <td><span class="pos sm">{{ p.position }}</span></td>
+      <td>
+        <a class="name-with-face" href="/players/{{ p.slug }}">
+          <img class="face sm" src="{{ p.image_url }}" alt="">
+          {{ p.name }}
+        </a>
+        <span class="card-type">{{ p.card_type }}{% if p.pack_name %} · {{ p.pack_name }}{% endif %}</span>
+      </td>
+      <td class="num">{{ p.overall }}</td>
+      <td class="num">{{ p.fee }}M</td>
+      <td class="num">{{ p.release_clause or "—" }}</td>
+      <td>
+        {% if sea_release_window %}
+        <form action="/squad/release" method="post" class="upload">
+          <input type="hidden" name="pid" value="{{ p.pid }}">
+          <button type="submit" class="secondary">Release to sea</button>
+        </form>
+        {% endif %}
+        {% if clause_window %}
+        <form action="/squad/clause" method="post" class="upload">
+          <input type="hidden" name="pid" value="{{ p.pid }}">
+          <input type="number" name="clause" min="1" placeholder="Clause" required>
+          <button type="submit">Set clause</button>
+        </form>
+        {% endif %}
+        {% if transfer_window %}
+        <form action="/squad/offer" method="post" class="upload">
+          <input type="hidden" name="pid" value="{{ p.pid }}">
+          <select name="to_team_id" required>
+            <option value="">To club</option>
+            {% for t in other_teams %}
+            <option value="{{ t.id }}">{{ t.name }}</option>
+            {% endfor %}
+          </select>
+          <input type="number" name="fee" min="1" placeholder="Fee" required>
+          <select name="kind">
+            <option value="transfer">Transfer</option>
+            <option value="loan">Loan</option>
+          </select>
+          <button type="submit">Offer</button>
+        </form>
+        {% endif %}
+      </td>
+    </tr>
+  {% else %}
+    <tr><td colspan="6" class="empty">Empty books. Open the <a href="/market">market</a> when a sea window is on.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% if competitions %}
+<nav class="comp-tabs">
+  {% for c in competitions %}
+  <a class="{% if current and c.id == current.id %}on{% endif %}" href="/league/{{ league.slug }}?comp={{ c.slug }}">{{ c.name }}</a>
+  {% endfor %}
+</nav>
+{% endif %}
+
+{% if current %}
+<p class="dim">{{ current.kind_label }}{% if current.level %} · level {{ current.level }} of 3{% endif %}</p>
+
+<table class="players standings">
+  <thead>
+    <tr>
+      <th>#</th><th>Club</th><th class="num">GP</th><th class="num">W</th><th class="num">T</th>
+      <th class="num">L</th><th class="num">GF</th><th class="num">GA</th><th class="num">GD</th><th class="num">PTS</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in table %}
+    <tr {% if my_team and row.team_id == my_team.id %}class="on"{% endif %}>
+      <td class="num">{{ row.rank }}</td>
+      <td>{{ row.label }}</td>
+      <td class="num">{{ row.gp }}</td>
+      <td class="num">{{ row.w }}</td>
+      <td class="num">{{ row.t }}</td>
+      <td class="num">{{ row.l }}</td>
+      <td class="num">{{ row.gf }}</td>
+      <td class="num">{{ row.ga }}</td>
+      <td class="num">{{ row.gd }}</td>
+      <td class="num pts">{{ row.pts }}</td>
+    </tr>
+    {% else %}
+    <tr><td colspan="10" class="empty">No clubs in this competition yet.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}

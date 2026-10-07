@@ -1,0 +1,205 @@
+{% extends "base.html" %}
+{% block title %}{{ player.name }} — {{ player.overall }} OVR{% endblock %}
+{% block body_class %}player-page{% endblock %}
+{% block extra_head %}
+<link rel="stylesheet" href="/static/player.css?v=7">
+<script src="/static/player-build.js?v=6" defer></script>
+{% endblock %}
+{% block content %}
+<article class="ef-sheet" id="player-sheet">
+  <header class="ef-top">
+    <div class="ef-top-left">
+      <div class="ef-card-row">
+        <img class="face xl" src="{{ player.image_url }}" alt="{{ player.name }} card">
+        <dl class="ef-facts">
+          <div><dt>Height</dt><dd>{{ player.height or "—" }}cm</dd></div>
+          <div><dt>Weight</dt><dd>{{ player.weight or "—" }}kg</dd></div>
+          <div><dt>Age</dt><dd>{{ player.age or "—" }}</dd></div>
+          <div><dt>Foot</dt><dd>{{ player.foot or "—" }}</dd></div>
+        </dl>
+      </div>
+      {% if player.boosters %}
+      <div class="ef-boost-selects">
+        <label>Booster 1
+          <select id="booster-a">
+            <option value="">Off</option>
+            {% for b in player.boosters %}
+            <option value="{{ b.id }}">{{ b.name }}</option>
+            {% endfor %}
+          </select>
+        </label>
+        <label>Booster 2
+          <select id="booster-b">
+            <option value="">Off</option>
+            {% for b in player.boosters %}
+            <option value="{{ b.id }}">{{ b.name }}</option>
+            {% endfor %}
+          </select>
+        </label>
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="ef-top-mid">
+      <h1>{{ player.name }}</h1>
+      <p class="ef-style">{% if player.att_style %}{{ player.att_style }}{% endif %}</p>
+      {% if player.def_style %}<p class="ef-style dim">{{ player.def_style }}</p>{% endif %}
+      <p class="card-type">{{ player.position }} · {{ player.card_type }}{% if player.pack_name %} · <a href="/packs/{{ player.pack_slug }}">{{ player.pack_name }}</a>{% endif %}</p>
+      <p class="ef-live">
+        <span>OVR <b id="live-ovr">{{ player.overall }}</b></span>
+        <span>MAX <b>{{ player.max_overall }}</b></span>
+        <span>Lv <b id="live-level">{{ player.level }}</b>/{{ player.max_level }}</span>
+      </p>
+      <p class="dim" id="build-summary"></p>
+      {% if league and player.market_status %}
+      <p class="ef-live">
+        <span>League <b>{{ league.name }}</b></span>
+        <span>Status <b>{{ player.market_status.label }}</b></span>
+        <span>Fee <b>{{ player.market_price }}M</b></span>
+      </p>
+      {% endif %}
+      <p class="ef-actions">
+        {% if my_team and player.market_status and player.market_status.code == 'free' and can_sign_free %}
+        <form action="/market/sign" method="post" class="upload">
+          <input type="hidden" name="pid" value="{{ player.pid }}">
+          <button type="submit">Sign for {{ player.market_price }}M</button>
+        </form>
+        {% elif my_team and player.market_status and player.market_status.code == 'sea' and sea_window %}
+        <form action="/market/sign" method="post" class="upload">
+          <input type="hidden" name="pid" value="{{ player.pid }}">
+          <button type="submit">Sign for {{ player.market_price }}M</button>
+        </form>
+        {% elif my_team and player.market_status and player.market_status.code == 'signed' and player.market_status.release_clause and clause_window %}
+        <form action="/market/buyout" method="post" class="upload">
+          <input type="hidden" name="pid" value="{{ player.pid }}">
+          <button type="submit">Buyout {{ player.market_status.release_clause }}M</button>
+        </form>
+        {% endif %}
+        <a class="btn secondary" href="/market?q={{ player.name }}">Market</a>
+        <a class="btn secondary" href="/compare?a={{ player.slug }}">Compare</a>
+      </p>
+    </div>
+
+    <div class="ef-top-right">
+      <table class="pos-grid">
+        {% for row in player.pos_grid %}
+        <tr>
+          {% for cell in row %}
+            {% if cell %}
+            <td class="{{ cell.tone }}{% if cell.primary %} primary{% endif %}">
+              <span>{{ cell.pos }}</span>
+              <b>{{ cell.rating }}</b>
+            </td>
+            {% else %}
+            <td class="empty"></td>
+            {% endif %}
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </header>
+
+  <div class="ef-body">
+    <aside class="ef-progress">
+      {% if player.can_grow %}
+      <div class="build-control">
+        <div class="section-head">
+          <h2>{{ player.position }}</h2>
+          <button type="button" class="secondary" id="max-build">Max</button>
+        </div>
+        <div class="section-head">
+          <span>Level</span>
+          <span><b id="level-label">{{ player.level }}</b> / {{ player.max_level }}</span>
+        </div>
+        <input id="level-slider" type="range" min="{{ player.level }}" max="{{ player.max_level }}" value="{{ player.level }}" step="1">
+        {% if player.progression_points %}
+        <div class="section-head">
+          <span>Progression</span>
+          <span><b id="prog-label">0</b> / {{ player.progression_points }}</span>
+        </div>
+        <input id="prog-slider" type="range" min="0" max="{{ player.progression_points }}" value="0" step="1">
+        {% endif %}
+      </div>
+      {% endif %}
+      <h2>Playing styles</h2>
+      <div class="chips">
+        {% if player.att_style %}<span>{{ player.att_style }}</span>{% endif %}
+        {% if player.def_style %}<span>{{ player.def_style }}</span>{% endif %}
+        <span>{{ player.position }}</span>
+        {% for pos in player.secondaries %}<span>{{ pos }}</span>{% endfor %}
+      </div>
+    </aside>
+
+    <div class="ef-main">
+      <div class="stats-3col">
+        {% for group, stats in player.ability_groups.items() %}
+        {% set area = player.area_growth[group] %}
+        <div class="ability-area area-{{ group }}">
+          <div class="section-head">
+            <h2>{{ group|capitalize }}</h2>
+            <span class="area-incr" data-area="{{ group }}">{% if area.gain %}+{{ area.gain }}{% else %}+0{% endif %}</span>
+          </div>
+          <ul class="stats">
+            {% for s in stats if not s.hidden %}
+            <li class="stat-row" data-key="{{ s.key }}" data-base="{{ s.value }}" data-max="{{ s.max_value }}">
+              <span>{{ s.label }}</span>
+              <div class="bar">
+                <i class="incr-fill" style="width: {{ s.max_pct }}%"></i>
+                <i class="now-fill {{ group }}" style="width: {{ s.now_pct }}%"></i>
+              </div>
+              <b class="stat-now">{{ s.value }}</b>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endfor %}
+      </div>
+
+      <div class="ef-lower">
+        <div>
+          <h2>Player skills</h2>
+          <div class="chips">
+            {% for s in player.skills %}<span>{{ s }}</span>{% else %}<span class="dim">None listed</span>{% endfor %}
+          </div>
+        </div>
+        <div>
+          <h2>AI playing styles</h2>
+          <div class="chips">
+            {% for s in player.ai_styles %}<span>{{ s }}</span>{% else %}<span class="dim">None listed</span>{% endfor %}
+          </div>
+        </div>
+        <aside>
+          <h2>Other details</h2>
+          <dl class="facts">
+            <dt>Form</dt><dd>{{ player.form or "—" }}</dd>
+            <dt>Injury resistance</dt><dd>{{ player.injury_resistance or "—" }}</dd>
+            <dt>Weak foot usage</dt><dd>{{ player.weak_foot_usage or "—" }}</dd>
+            <dt>Weak foot accuracy</dt><dd>{{ player.weak_foot_accuracy or "—" }}</dd>
+            <dt>PID</dt><dd>{{ player.pid }}</dd>
+          </dl>
+        </aside>
+      </div>
+    </div>
+  </div>
+</article>
+
+{% if others %}
+<h2>Other versions</h2>
+<p class="dim">Same player in Authentic, Dream Team standard, or featured packs.</p>
+<div class="card-grid">
+  {% for p in others %}
+  <a class="player-card" href="/players/{{ p.slug }}">
+    <img class="face" src="{{ p.image_url }}" alt="{{ p.name }} card">
+    <span class="pos">{{ p.position }}</span>
+    <strong>{{ p.name }}</strong>
+    <span class="meta">{{ p.mode_label }} · {{ p.card_type }}{% if p.pack_name %} · {{ p.pack_name }}{% endif %}</span>
+    <span class="ovr">{{ p.overall }}</span>
+    <span class="dim">MAX {{ p.max_overall }} · Lv {{ p.max_level }}</span>
+  </a>
+  {% endfor %}
+</div>
+{% endif %}
+
+<script id="player-build-data" type="application/json">{{ player.build | tojson }}</script>
+{% endblock %}

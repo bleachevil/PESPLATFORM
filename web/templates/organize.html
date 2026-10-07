@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+{% block title %}Organize {{ league.name }}{% endblock %}
+{% block content %}
+<p class="eyebrow">{% if is_host %}League host{% else %}League officer{% endif %}</p>
+<h1>{{ league.name }}</h1>
+{% if message %}<p class="notice ok">{{ message }}</p>{% endif %}
+{% if error %}<p class="notice err">{{ error }}</p>{% endif %}
+
+<h2>Join requests and invitations</h2>
+<p class="dim">Nobody joins until a host or officer approves. Invitations can be accepted by the manager you invited.</p>
+{% if join_requests %}
+<table class="players">
+  <thead><tr><th>Manager</th><th>Club</th><th>Kind</th><th></th></tr></thead>
+  <tbody>
+  {% for r in join_requests %}
+    <tr>
+      <td>{{ r.manager_name }}<br><span class="card-type">{{ r.email }}</span></td>
+      <td>{{ r.team_name }}</td>
+      <td>{{ r.kind }} · {{ r.status }}</td>
+      <td>
+        <form action="/league/{{ league.slug }}/requests/{{ r.id }}/decide" method="post" class="upload">
+          <button type="submit" name="accept" value="1">Approve</button>
+          <button type="submit" name="accept" value="0" class="secondary">Reject</button>
+        </form>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p class="empty">No pending requests.</p>
+{% endif %}
+<form action="/league/{{ league.slug }}/invite" method="post" class="stack-form">
+  <label>Invite by Google email
+    <input type="email" name="email" placeholder="manager@gmail.com" required>
+  </label>
+  <label>Suggested club name
+    <input type="text" name="team_name" placeholder="Optional">
+  </label>
+  <button type="submit">Send invitation</button>
+</form>
+
+<h2>Officers</h2>
+<p class="dim">Officers can approve joins, invitations, and match results. Only the host can grant or remove them.</p>
+{% if officers %}
+<table class="players">
+  <thead><tr><th>Officer</th><th>Email</th><th></th></tr></thead>
+  <tbody>
+  {% for o in officers %}
+    <tr>
+      <td>{{ o.name }}</td>
+      <td>{{ o.email }}</td>
+      <td>
+        {% if is_host %}
+        <form action="/league/{{ league.slug }}/officers/{{ o.user_id }}/revoke" method="post" class="upload">
+          <button type="submit" class="secondary">Remove</button>
+        </form>
+        {% endif %}
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p class="empty">No officers yet.</p>
+{% endif %}
+{% if is_host %}
+<form action="/league/{{ league.slug }}/officers" method="post" class="stack-form">
+  <label>Grant by Google email
+    <input type="email" name="email" placeholder="officer@gmail.com" required>
+  </label>
+  <button type="submit">Grant officer</button>
+</form>
+{% endif %}
+
+<h2>Competitions</h2>
+<p class="dim">Up to 3 league levels, plus one cup, one Champions League, and any number of one-off events (World Cup, UEFA, friendlies).</p>
+<table class="players">
+  <thead><tr><th>Competition</th><th>Type</th><th>Clubs</th><th>Matches</th></tr></thead>
+  <tbody>
+  {% for c in competitions %}
+    <tr>
+      <td><a href="/league/{{ league.slug }}?comp={{ c.slug }}">{{ c.name }}</a></td>
+      <td>{{ c.kind_label }}{% if c.level %} {{ c.level }}{% endif %}</td>
+      <td class="num">{{ c.team_count }}</td>
+      <td class="num">{{ c.fixture_count }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+<form action="/league/{{ league.slug }}/competitions" method="post" class="stack-form">
+  <label>Add
+    <select name="kind">
+      <option value="division">League level (max 3)</option>
+      <option value="cup">Cup</option>
+      <option value="ucl">Champions League</option>
+      <option value="event">One-off (World Cup, UEFA, …)</option>
+    </select>
+  </label>
+  <label>Name
+    <input type="text" name="name" placeholder="World Cup · or leave blank for defaults">
+  </label>
+  <button type="submit">Open competition</button>
+</form>
+
+{% if is_host %}
+<h2>Season setup</h2>
+<form action="/league/{{ league.slug }}/organize" method="post" class="stack-form">
+  <label>League name
+    <input type="text" name="name" value="{{ league.name }}" required>
+  </label>
+  <label>Max players
+    <input type="number" name="max_teams" value="{{ league.max_teams }}" min="2" max="64">
+  </label>
+  <label>Number of weeks
+    <input type="number" name="weeks" value="{{ league.weeks or 6 }}" min="2" max="20">
+  </label>
+  <label>Season start
+    <input type="date" name="start_on" value="{{ league.start_on }}">
+  </label>
+  <label>Status
+    <select name="status">
+      <option value="open" {% if league.status == 'open' %}selected{% endif %}>Open for join requests</option>
+      <option value="active" {% if league.status == 'active' %}selected{% endif %}>Season active</option>
+      <option value="closed" {% if league.status == 'closed' %}selected{% endif %}>Closed</option>
+    </select>
+  </label>
+  <p>
+    <button type="submit">Save and rebuild calendar</button>
+  </p>
+</form>
+<p class="dim">Changing weeks or the start date rebuilds first half, mid-season transfer, second half, and the end-of-season window.</p>
+
+<h2>Season calendar</h2>
+{% include "calendar_table.html" %}
+<form action="/league/{{ league.slug }}/calendar" method="post" class="upload">
+  <button type="submit" class="secondary">Rebuild calendar again</button>
+</form>
+{% endif %}
+
+<p><a href="/league/{{ league.slug }}">Back to league table</a></p>
+{% endblock %}

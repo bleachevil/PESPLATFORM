@@ -1,0 +1,37 @@
+{% macro stat_row(s) %}
+<li class="stat-row" data-base="{{ s.value }}" data-max="{{ s.max_value }}">
+  <span>{{ s.label }}</span>
+  <div class="bar">
+    <i class="incr-fill" style="width: {{ s.max_pct }}%"></i>
+    <i class="{{ bar_color(s.value) }} now-fill" style="width: {{ s.now_pct }}%"></i>
+  </div>
+  <b class="stat-now">{{ s.value }}</b>
+  {% if s.gain %}
+  <b class="stat-incr">+{{ s.gain }}</b>
+  {% else %}
+  <b class="stat-incr dim">+0</b>
+  {% endif %}
+</li>
+{% endmacro %}
+
+{% macro ability_areas(player) %}
+{% for group, stats in player.ability_groups.items() %}
+{% set area = player.area_growth[group] %}
+<div class="ability-area">
+  <div class="section-head">
+    <h2>{{ group|capitalize }}</h2>
+    <span class="area-incr {% if area.gain %}incr{% else %}dim{% endif %}">{% if area.gain %}+{{ area.gain }} to max{% else %}No growth{% endif %}</span>
+  </div>
+  <div class="bar area-bar">
+    <i class="incr-fill" style="width: {{ area.max_pct }}%"></i>
+    <i class="green now-fill" style="width: {{ area.now_pct }}%"></i>
+  </div>
+  <p class="area-meta">Avg {{ area.now }} → {{ area.max }} at max level</p>
+  <ul class="stats">
+    {% for s in stats if not s.hidden %}
+    {{ stat_row(s) }}
+    {% endfor %}
+  </ul>
+</div>
+{% endfor %}
+{% endmacro %}

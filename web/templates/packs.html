@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Packs{% endblock %}
+{% block content %}
+<h1>Dream Team packs</h1>
+{% if mode != 'dream-team' %}
+<p class="notice ok">Packs belong to Dream Team. <a href="/mode/dream-team?next=/packs">Switch to Dream Team</a> to browse featured lists.</p>
+{% endif %}
+<p class="lede">Special Player Lists and weekly featured packs. Import a CSV with Pack and PackDate columns to refresh this after each live update.</p>
+{% if packs %}
+<div class="card-grid">
+  {% for pack in packs %}
+  <a class="pack-card" href="/packs/{{ pack.slug }}">
+    {% if pack.previews %}
+    <div class="pack-preview" aria-hidden="true">
+      {% for p in pack.previews %}
+      <img src="{{ p.image_url }}" alt="" width="72" height="102">
+      {% endfor %}
+    </div>
+    {% endif %}
+    <span class="eyebrow">{{ pack.kind }}</span>
+    <strong>{{ pack.name }}</strong>
+    <span class="meta">{{ pack.player_count }} players{% if pack.released_on %} · {{ pack.released_on }}{% endif %}{% if pack.top_ovr %} · top {{ pack.top_ovr }}{% endif %}</span>
+  </a>
+  {% endfor %}
+</div>
+{% else %}
+<p class="empty">No packs imported. <a href="/import">Load sample data</a>.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}Football manager desk{% endblock %}
+{% block content %}
+<section class="hero">
+  <div>
+    <p class="eyebrow">eFootball · manager league</p>
+    <h1>Run the club here. Play the match in eFootball.</h1>
+    <p class="lede">Sign in, join a friend’s league, and hold contracts, budget, and transfer windows on this desk. The catalog is only here so you can pick a player without opening pesdb or efhub.</p>
+    <form class="hero-search" action="/market" method="get">
+      <input type="search" name="q" placeholder="Search a player to sign">
+      <button type="submit">Open market</button>
+    </form>
+    <p class="chips">
+      <a class="btn" href="/leagues">Join or create a league</a>
+      {% if not user %}<a class="btn secondary" href="/login">Sign in with Google</a>{% endif %}
+    </p>
+  </div>
+  <aside class="status-card">
+    <h2>{% if league %}{{ league.name }}{% else %}This desk{% endif %}</h2>
+    <dl>
+      <dt>Catalog</dt>
+      <dd>{{ stats.players }} players</dd>
+      {% if league %}
+      <dt>Season</dt>
+      <dd>{{ league.weeks or 6 }} weeks · {{ league.start_on }} → {{ league.end_on }}</dd>
+      <dt>Window</dt>
+      <dd>{% if window %}{{ window.title }}{% else %}None open{% endif %}</dd>
+      {% if my_team %}
+      <dt>Club</dt>
+      <dd>{{ my_team.name }}</dd>
+      <dt>Budget</dt>
+      <dd>{{ my_team.budget }}M</dd>
+      {% endif %}
+      {% else %}
+      <dt>Leagues</dt>
+      <dd>{{ league_count }} open</dd>
+      {% endif %}
+    </dl>
+    {% if league %}
+    <a class="btn secondary" href="/league/{{ league.slug }}">League home →</a>
+    {% else %}
+    <a class="btn secondary" href="/leagues">Choose a league →</a>
+    {% endif %}
+  </aside>
+</section>
+
+<section class="import-grid">
+  <article>
+    <h2>How a season works</h2>
+    <ol class="steps">
+      <li>The host sets league name, max players, and number of weeks. The desk builds first half, winter, second half, and summer.</li>
+      <li>Managers ask to join. A host or officer has to approve before a club is in the league.</li>
+      <li>Available, Signed, and In the sea tell you who you can pick.</li>
+      <li>After a first squad, sign only in the winter/summer sea windows. New clubs can still build that first squad.</li>
+      <li>You play the fixture in eFootball. This site keeps the books.</li>
+    </ol>
+  </article>
+  <article>
+    <h2>Open leagues</h2>
+    {% if leagues %}
+    <ul class="steps">
+      {% for lg in leagues %}
+      <li><a href="/league/{{ lg.slug }}">{{ lg.name }}</a> · {{ lg.weeks or 6 }} weeks · {{ lg.team_count }}/{{ lg.max_teams }} players</li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p class="empty">No leagues yet.</p>
+    {% endif %}
+  </article>
+</section>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% from "macros.html" import ability_areas %}
+{% block title %}Compare{% endblock %}
+{% block content %}
+<h1>Compare players</h1>
+<p class="lede">Compare Authentic vs Dream Team versions, or two featured cards.</p>
+<form class="filters" method="get">
+  <select name="a">
+    <option value="">Player A</option>
+    {% for p in suggestions %}
+    <option value="{{ p.slug }}" {% if a == p.slug or a == p.pid %}selected{% endif %}>{{ p.name }} · {{ p.mode_label }} {{ p.card_type }} ({{ p.position }} {{ p.overall }})</option>
+    {% endfor %}
+  </select>
+  <select name="b">
+    <option value="">Player B</option>
+    {% for p in suggestions %}
+    <option value="{{ p.slug }}" {% if b == p.slug or b == p.pid %}selected{% endif %}>{{ p.name }} · {{ p.mode_label }} {{ p.card_type }} ({{ p.position }} {{ p.overall }})</option>
+    {% endfor %}
+  </select>
+  <button type="submit">Compare</button>
+</form>
+
+{% if left and right %}
+<div class="compare">
+  {% for p in [left, right] %}
+  <section>
+    <a class="player-card" href="/players/{{ p.slug }}">
+      <img class="face" src="{{ p.image_url }}" alt="{{ p.name }} card">
+      <span class="pos">{{ p.position }}</span>
+      <strong>{{ p.name }}</strong>
+      <span class="meta">{{ p.mode_label }} · {{ p.card_type }}{% if p.pack_name %} · {{ p.pack_name }}{% endif %}</span>
+      <span class="ovr">{{ p.overall }}</span>
+      <span class="dim">MAX {{ p.max_overall }} · Lv {{ p.level }}/{{ p.max_level }}</span>
+    </a>
+    {{ ability_areas(p) }}
+  </section>
+  {% endfor %}
+</div>
+{% else %}
+<p class="empty">Pick two players to compare abilities side by side.</p>
+{% endif %}
+{% endblock %}

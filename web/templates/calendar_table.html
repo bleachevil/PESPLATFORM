@@ -1,0 +1,23 @@
+{% if calendar %}
+<table class="players calendar">
+  <thead>
+    <tr><th>Period</th><th>Dates</th><th>League</th></tr>
+  </thead>
+  <tbody>
+  {% for group in calendar %}
+    <tr class="cal-phase {{ group.phase }}">
+      <td colspan="3">{{ group.label }}</td>
+    </tr>
+    {% for w in group.rows %}
+    <tr class="{% if w.is_open %}on{% endif %}">
+      <td>{{ w.period or "—" }}</td>
+      <td>{{ w.when_label }}</td>
+      <td>{{ w.activity }}</td>
+    </tr>
+    {% endfor %}
+  {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p class="empty">No calendar yet. Save the league settings to generate one.</p>
+{% endif %}

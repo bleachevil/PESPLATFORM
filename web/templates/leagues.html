@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}Leagues{% endblock %}
+{% block content %}
+<h1>Leagues</h1>
+<p class="lede">Join a friend’s league or open one as host. You only set the name, max players, and how many weeks the season should run.</p>
+{% if message %}<p class="notice ok">{{ message }}</p>{% endif %}
+{% if error %}<p class="notice err">{{ error }}</p>{% endif %}
+
+<section class="import-grid">
+  <article>
+    <h2>Open leagues</h2>
+    {% if leagues %}
+    <table class="players">
+      <thead>
+        <tr><th>League</th><th>Season</th><th>Players</th><th></th></tr>
+      </thead>
+      <tbody>
+        {% for lg in leagues %}
+        <tr>
+          <td><a href="/league/{{ lg.slug }}">{{ lg.name }}</a><br><span class="card-type">{{ lg.status }}</span></td>
+          <td>{{ lg.weeks or 6 }} weeks<br><span class="card-type">{{ lg.start_on or "—" }} → {{ lg.end_on or "—" }}</span></td>
+          <td class="num">{{ lg.team_count }}/{{ lg.max_teams }}</td>
+          <td>
+            {% if not user %}
+            <a href="/login?next=/leagues">Sign in with Google to ask to join</a>
+            {% elif pending.get(lg.id) and pending[lg.id].kind == 'invite' %}
+            <form action="/league/{{ lg.slug }}/invite/accept" method="post" class="upload">
+              <button type="submit">Accept invite</button>
+            </form>
+            {% elif pending.get(lg.id) %}
+            <span class="status sea">Waiting for approval</span>
+            {% else %}
+            <form action="/league/{{ lg.slug }}/join" method="post" class="upload">
+              <input type="text" name="team_name" placeholder="Your club name" required>
+              <button type="submit">Ask to join</button>
+            </form>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p class="empty">No leagues yet.</p>
+    {% endif %}
+  </article>
+  <article>
+    <h2>Create a league</h2>
+    {% if user %}
+    <form action="/leagues/create" method="post" class="stack-form">
+      <label>League name
+        <input type="text" name="name" placeholder="Friday night league" required>
+      </label>
+      <label>Max players
+        <input type="number" name="max_teams" value="16" min="2" max="64">
+      </label>
+      <label>Number of weeks
+        <input type="number" name="weeks" value="6" min="2" max="20">
+      </label>
+      <button type="submit">Create league</button>
+    </form>
+    <p class="dim">A 6-week season is first-half matches, a mid-season transfer week, second-half matches and playoffs, then the end-of-season window. The season starts this coming Friday — move that date later if you need to.</p>
+    {% else %}
+    <p class="empty"><a href="/login?next=/leagues">Sign in with Google</a> to create a league.</p>
+    {% endif %}
+  </article>
+</section>
+{% endblock %}
