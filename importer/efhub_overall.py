@@ -1,4 +1,9 @@
-"""Trained max overall, using the same weights eFHUB uses for its Max button."""
+"""Trained max overall, matching the green Max button on eFHUB.
+
+The rating weights, weak-foot term, and point costs are the same ones
+eFHUB ships. The button spends training points by position weight per
+point, one slider at a time, rather than by the older overall-gain search.
+"""
 
 from __future__ import annotations
 
@@ -150,42 +155,53 @@ def apply_progression(stats: dict, sliders: dict[str, int]) -> dict:
     return grown
 
 
-def max_sliders(stats: dict, position: str, height: int, weak_foot: int, points: int) -> dict[str, int]:
+def max_sliders(stats: dict, position: str, _height: int, _weak_foot: int, points: int) -> dict[str, int]:
+    """Spend progression points the way eFHUB's Max button does.
+
+    Each pass locks onto one rank in the weight-per-point list (best, then
+    second best, and so on) and buys that slider until it is capped or the
+    next level costs more than the points left. Height and weak foot change
+    the rating, not which slider gets the next point.
+    """
+    column = POSITION_COLUMN.get((position or "").upper())
     sliders = {key: 0 for key, _affected in SLIDERS}
+    if column is None:
+        return sliders
+    grown = {key: int(value or 0) for key, value in stats.items()}
     remaining = points
-    while remaining > 0:
-        best_key = None
-        best_gain = float("-inf")
-        current = apply_progression(stats, sliders)
-        current_ovr = overall_decimal(position, height, weak_foot, current)
-        for key, _affected in SLIDERS:
-            level = sliders[key]
-            if level >= 25:
-                continue
-            cost = _point_cost(level + 1)
-            if cost > remaining:
-                continue
-            trial = dict(sliders)
-            trial[key] = level + 1
-            gained = apply_progression(stats, trial)
-            delta = (overall_decimal(position, height, weak_foot, gained) - current_ovr) / cost
-            if delta > best_gain:
-                best_gain = delta
-                best_key = key
-        if best_key is None or best_gain <= 0:
+    offsets = {key: offset for key, offset in STAT_OFFSETS}
+    for rank in range(len(SLIDERS)):
+        if remaining <= 0:
             break
-        sliders[best_key] += 1
-        remaining -= _point_cost(sliders[best_key])
-    if remaining > 0:
-        for key, _affected in SLIDERS:
-            while sliders[key] < 25 and remaining > 0:
-                cost = _point_cost(sliders[key] + 1)
-                if cost > remaining:
-                    break
-                sliders[key] += 1
-                remaining -= cost
-            if remaining == 0:
+        while remaining > 0:
+            scored: list[tuple[float, int]] = []
+            for index, (key, affected) in enumerate(SLIDERS):
+                if sliders[key] >= 25:
+                    scored.append((0.0, index))
+                    continue
+                weight_sum = 0
+                for stat in affected:
+                    if grown.get(stat, 0) >= 99:
+                        continue
+                    offset = offsets.get(stat)
+                    if offset is not None:
+                        weight_sum += _weight(offset, column)
+                if weight_sum == 0:
+                    scored.append((0.0, index))
+                    continue
+                scored.append((weight_sum / _point_cost(sliders[key] + 1), index))
+            scored.sort(key=lambda item: item[0], reverse=True)
+            if rank >= len(scored) or scored[rank][0] <= 0:
                 break
+            key, affected = SLIDERS[scored[rank][1]]
+            cost = _point_cost(sliders[key] + 1)
+            if remaining < cost:
+                break
+            sliders[key] += 1
+            remaining -= cost
+            for stat in affected:
+                if grown.get(stat, 0) < 99:
+                    grown[stat] = grown.get(stat, 0) + 1
     return sliders
 
 

@@ -14,7 +14,7 @@
 {% endif %}
 
 <div class="chips">
-  <a class="btn" href="/market">Player market</a>
+  {% if my_team %}<a class="btn" href="/market">Player market</a>{% else %}<a class="btn" href="/players">Players</a>{% endif %}
   {% if my_team %}<a class="btn secondary" href="/squad">My squad · {{ my_team.name }} ({{ my_team.budget }}M)</a>{% endif %}
   {% if can_manage %}<a class="btn secondary" href="/league/{{ league.slug }}/organize">Manage league</a>{% endif %}
   {% if user and not my_team and my_request and my_request.kind == 'invite' %}

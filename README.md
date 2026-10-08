@@ -41,10 +41,50 @@ py -3.9 importer\fill_efhub_levels.py
 cd C:\projects\pesdata
 py -3.9 -m pip install -r requirements.txt
 py -3.9 importer\import_csv.py data\sample\players.sample.csv
-py -3.9 -m uvicorn web.app:app --reload --port 8000
+py -3.9 -m uvicorn web.app:app --reload --host 0.0.0.0 --port 8000
 ```
 
 Open http://127.0.0.1:8000
+
+### Android app
+
+The Flutter app in `android_app/` talks to this server as JSON (`/api/...`). Phones cannot use `127.0.0.1`; bind uvicorn to `0.0.0.0` as above.
+
+1. Install [Flutter](https://docs.flutter.dev/get-started/install/windows) and an Android emulator or USB device.
+2. On the PC, start the API with `--host 0.0.0.0 --port 8000`.
+3. In Google Cloud Console (same project as the web OAuth client):
+   - Keep the **Web** client ID (the app sends that as `serverClientId` so Google returns an ID token).
+   - Add an **Android** client ID with package `com.pesdata.manager_desk` and your debug SHA-1:
+     `keytool -keystore %USERPROFILE%\.android\debug.keystore -storepass android -list -v`
+   - Put extra Android client IDs in `GOOGLE_APP_CLIENT_IDS` in `data/google_oauth.env` if the token `aud` is not the web client.
+4. From `android_app/`: `flutter pub get` then `flutter run`.
+5. On a physical phone, set the API server to `http://YOUR_PC_LAN_IP:8000`. The Android emulator can use `http://10.0.2.2:8000`.
+
+CSV import, pesdb scrape, and CPK extract stay on the PC. The app covers sign-in, leagues, market, squad, catalog, and organize.
+
+### Postgres locally (same engine as Cloud SQL)
+
+Leave `DATABASE_URL` unset to keep using `data/pesdata.sqlite`. To match Cloud Run:
+
+```powershell
+docker compose up --build
+```
+
+That starts Postgres and the API on http://127.0.0.1:8000. Import into Postgres with:
+
+```powershell
+$env:DATABASE_URL = "postgresql://pesdata:pesdata@localhost:5432/pesdata"
+python importer\import_csv.py data\sample\players.sample.csv
+```
+
+### Cloud Run + Cloud SQL
+
+1. Create a Cloud SQL Postgres instance in project `footballplatform`.
+2. Put `DB_PASSWORD` in your shell, then run `.\deploy-cloud-run.ps1`.
+3. Point the Android app at the Cloud Run URL (`https://….run.app`).
+4. Add `https://YOUR-SERVICE.run.app/auth/google/callback` as an Authorized redirect URI on the Web OAuth client.
+
+Weekly player updates: scrape on the PC, then run `import_csv.py` with `DATABASE_URL` set to Cloud SQL (Cloud SQL Auth Proxy on localhost:5432) so Cloud Run sees the new catalog.
 
 - **Dream Team / Authentic** — header toggle, same idea as pesdb’s two databases
 - **Home** — latest packs (Dream Team) or authentic squads

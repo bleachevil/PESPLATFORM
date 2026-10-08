@@ -2,7 +2,7 @@
 {% block title %}{{ player.name }} — {{ player.overall }} OVR{% endblock %}
 {% block body_class %}player-page{% endblock %}
 {% block extra_head %}
-<link rel="stylesheet" href="/static/player.css?v=7">
+<link rel="stylesheet" href="/static/player.css?v=10">
 <script src="/static/player-build.js?v=6" defer></script>
 {% endblock %}
 {% block content %}
@@ -75,28 +75,22 @@
           <button type="submit">Buyout {{ player.market_status.release_clause }}M</button>
         </form>
         {% endif %}
-        <a class="btn secondary" href="/market?q={{ player.name }}">Market</a>
+        {% if my_team %}<a class="btn secondary" href="/market?q={{ player.name }}">Market</a>{% endif %}
         <a class="btn secondary" href="/compare?a={{ player.slug }}">Compare</a>
       </p>
     </div>
 
     <div class="ef-top-right">
-      <table class="pos-grid">
+      <div class="pos-grid">
         {% for row in player.pos_grid %}
-        <tr>
-          {% for cell in row %}
-            {% if cell %}
-            <td class="{{ cell.tone }}{% if cell.primary %} primary{% endif %}">
+          {% for cell in row if cell %}
+            <div class="pos-cell pos-{{ cell.pos }} {{ cell.tone }}{% if cell.primary %} primary{% endif %}">
               <span>{{ cell.pos }}</span>
               <b>{{ cell.rating }}</b>
-            </td>
-            {% else %}
-            <td class="empty"></td>
-            {% endif %}
+            </div>
           {% endfor %}
-        </tr>
         {% endfor %}
-      </table>
+      </div>
     </div>
   </header>
 

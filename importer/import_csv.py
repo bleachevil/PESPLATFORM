@@ -18,6 +18,7 @@ if str(ROOT) not in sys.path:
 from importer.fields import ABILITY_KEYS, CSV_ALIASES, POSITIONS
 from importer.card_art import store_imported_image
 from importer.growth import default_max_level, default_max_overall, default_level
+from importer.db import connect, schema_sql
 from importer.league import init_league_db
 
 DB_PATH = ROOT / "data" / "pesdata.sqlite"
@@ -142,10 +143,8 @@ def _estimate_overall(row: dict) -> int:
 
 
 def init_db(db_path: Path = DB_PATH) -> sqlite3.Connection:
-    db_path.parent.mkdir(parents=True, exist_ok=True)
-    conn = sqlite3.connect(db_path)
-    conn.row_factory = sqlite3.Row
-    conn.executescript(SCHEMA_PATH.read_text(encoding="utf-8"))
+    conn = connect(db_path)
+    conn.executescript(schema_sql(conn))
     init_league_db(conn)
     existing = {row[1] for row in conn.execute("PRAGMA table_info(players)")}
     for column, spec in PLAYER_NEW_COLUMNS:
@@ -306,7 +305,7 @@ def import_csv(csv_path: Path, db_path: Path = DB_PATH, source: str = "csv") -> 
     result = import_records(records, db_path=db_path, source=source)
     result["columns"] = sorted(mapping.keys())
     result["csv_name"] = csv_path.name
-    conn = sqlite3.connect(db_path)
+    conn = init_db(db_path)
     conn.execute("INSERT OR REPLACE INTO meta(key, value) VALUES (?, ?)", ("csv_name", csv_path.name))
     conn.commit()
     conn.close()

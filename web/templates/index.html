@@ -5,20 +5,21 @@
   <div>
     <p class="eyebrow">eFootball · manager league</p>
     <h1>Run the club here. Play the match in eFootball.</h1>
-    <p class="lede">Sign in, join a friend’s league, and hold contracts, budget, and transfer windows on this desk. The catalog is only here so you can pick a player without opening pesdb or efhub.</p>
-    <form class="hero-search" action="/market" method="get">
-      <input type="search" name="q" placeholder="Search a player to sign">
-      <button type="submit">Open market</button>
+    <p class="lede">Sign in, join a friend’s league, then open the market to sign available players. Players lists everyone in the database.</p>
+    <form class="hero-search" action="/players" method="get">
+      <input type="search" name="q" placeholder="Search players">
+      <button type="submit">Search players</button>
     </form>
     <p class="chips">
       <a class="btn" href="/leagues">Join or create a league</a>
+      {% if my_team %}<a class="btn secondary" href="/market">Player market</a>{% else %}<a class="btn secondary" href="/players">Players</a>{% endif %}
       {% if not user %}<a class="btn secondary" href="/login">Sign in with Google</a>{% endif %}
     </p>
   </div>
   <aside class="status-card">
     <h2>{% if league %}{{ league.name }}{% else %}This desk{% endif %}</h2>
     <dl>
-      <dt>Catalog</dt>
+      <dt>Players</dt>
       <dd>{{ stats.players }} players</dd>
       {% if league %}
       <dt>Season</dt>

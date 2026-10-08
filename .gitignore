@@ -12,6 +12,7 @@ data/exports/*.recalc.partial.csv
 data/exports/*.levels.csv
 data/exports/*.pesdb.csv
 data/google_oauth.env
+.env
 uploads/
 .idea/
 .DS_Store

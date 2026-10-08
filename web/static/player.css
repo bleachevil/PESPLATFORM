@@ -70,30 +70,54 @@ body.player-page main {
 .ef-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0 0; }
 
 .pos-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: repeat(7, 1fr);
+  gap: 5px;
+  aspect-ratio: 1;
   width: 100%;
-  border-collapse: separate;
-  border-spacing: 6px;
-  table-layout: fixed;
+  padding: 8px;
+  box-sizing: border-box;
+  background: #0a0e16;
+  border: 1px solid #243152;
+  border-radius: 14px;
 }
-.pos-grid td {
-  width: 33.33%;
-  height: 58px;
-  text-align: center;
-  vertical-align: middle;
+.pos-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   border-radius: 8px;
   background: #161a22;
-  color: var(--muted);
-  padding: 4px;
+  color: #8b93a3;
+  text-align: center;
+  min-width: 0;
+  min-height: 0;
 }
-.pos-grid td span { display: block; font-size: 10px; font-weight: 700; }
-.pos-grid td b { display: block; font-size: 20px; color: var(--text); line-height: 1.15; }
-.pos-grid td.empty { visibility: hidden; }
-.pos-grid td.high { background: #1f6b45; color: #d8ffe8; }
-.pos-grid td.high b { color: #fff; }
-.pos-grid td.mid { background: #1a3f32; }
-.pos-grid td.ok { background: #1c2430; }
-.pos-grid td.low { background: #141820; }
-.pos-grid td.primary { box-shadow: inset 0 0 0 1px #8ee0b0; }
+.pos-cell.pos-CF { grid-area: 1 / 2; }
+.pos-cell.pos-SS { grid-area: 2 / 2; }
+.pos-cell.pos-AMF { grid-area: 3 / 2; }
+.pos-cell.pos-CMF { grid-area: 4 / 2; }
+.pos-cell.pos-DMF { grid-area: 5 / 2; }
+.pos-cell.pos-CB { grid-area: 6 / 2; }
+.pos-cell.pos-GK { grid-area: 7 / 2; }
+.pos-cell.pos-LWF { grid-area: 1 / 1 / 3 / 2; }
+.pos-cell.pos-RWF { grid-area: 1 / 3 / 3 / 4; }
+.pos-cell.pos-LMF { grid-area: 3 / 1 / 6 / 2; }
+.pos-cell.pos-RMF { grid-area: 3 / 3 / 6 / 4; }
+.pos-cell.pos-LB { grid-area: 6 / 1 / 8 / 2; }
+.pos-cell.pos-RB { grid-area: 6 / 3 / 8 / 4; }
+.pos-cell span { display: block; font-size: 10px; font-weight: 700; letter-spacing: .04em; line-height: 1; }
+.pos-cell b { display: block; font-size: 18px; color: var(--text); line-height: 1.15; margin-top: 2px; }
+.pos-cell.high { background: #3ecf8e; color: #fff; }
+.pos-cell.high b { color: #fff; }
+.pos-cell.mid { background: #0d3d2c; color: #d8ffe8; }
+.pos-cell.mid b { color: #fff; }
+.pos-cell.ok { background: #161a22; color: #8b93a3; }
+.pos-cell.ok b { color: var(--text); }
+.pos-cell.low { background: #101318; color: #6d7585; }
+.pos-cell.low b { color: #c5cddb; }
+.pos-cell.primary { box-shadow: inset 0 0 0 1px #8ee0b0; }
 
 .ef-body {
   display: flex;

@@ -17,7 +17,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import sqlite3
 import sys
 import threading
 import time
@@ -164,16 +163,22 @@ def load_known_max_overall() -> dict[str, int]:
     eFHUB's public player record has no max overall. Its Max button matches
     this value (Mbappé base 85, level cap 22, max 95).
     """
-    if not DB_PATH.exists():
+    from importer.db import connect, is_postgres
+
+    if not is_postgres() and not DB_PATH.exists():
         return {}
-    conn = sqlite3.connect(DB_PATH)
+    conn = None
     try:
+        conn = connect(DB_PATH)
         rows = conn.execute(
             "SELECT pid, max_overall FROM players WHERE max_overall IS NOT NULL AND max_overall > 0"
         )
         return {str(pid): int(value) for pid, value in rows if pid}
+    except Exception:
+        return {}
     finally:
-        conn.close()
+        if conn is not None:
+            conn.close()
 
 
 def apply_known_max(row: dict) -> dict:

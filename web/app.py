@@ -8,13 +8,29 @@ import sqlite3
 import sys
 from functools import lru_cache
 from pathlib import Path
-from typing import Optional
+from typing import Annotated, Optional
 from urllib.parse import quote, urlencode
 
 from fastapi import FastAPI, File, Form, Request, UploadFile
+from pydantic import BeforeValidator
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, RedirectResponse, Response
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+
+
+def _blank_int(value: object) -> Optional[int]:
+    if value is None or value == "":
+        return None
+    if isinstance(value, int):
+        return value
+    text = str(value).strip()
+    if not text:
+        return None
+    return int(text)
+
+
+BlankInt = Annotated[Optional[int], BeforeValidator(_blank_int)]
 
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
@@ -97,6 +113,13 @@ from importer.league import (
 WEB_DIR = Path(__file__).resolve().parent
 templates = Jinja2Templates(directory=str(WEB_DIR / "templates"))
 app = FastAPI(title="PES Data")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 app.mount("/static", StaticFiles(directory=str(WEB_DIR / "static")), name="static")
 
 UPLOADS = ROOT / "uploads"
@@ -165,7 +188,7 @@ def start_google_session(profile: dict) -> tuple[dict, str]:
     return user, token
 
 
-def set_league_cookie(response: RedirectResponse, slug: str) -> RedirectResponse:
+def set_league_cookie(response: Response, slug: str) -> Response:
     response.set_cookie(LEAGUE_COOKIE, slug, max_age=365 * 24 * 3600)
     return response
 
@@ -393,14 +416,21 @@ def query_players(
     limit: Optional[int] = None,
     card_type: str = "",
 ) -> list[sqlite3.Row]:
-    sql = "SELECT * FROM players WHERE mode = ?"
-    params: list = [mode]
+    sql = "SELECT * FROM players WHERE 1=1"
+    params: list = []
+    if mode:
+        sql += " AND mode = ?"
+        params.append(mode)
     if card_type:
         sql += " AND lower(card_type) = ?"
         params.append(card_type.strip().lower())
     if q:
-        sql += " AND (name LIKE ? OR club LIKE ? OR nationality LIKE ? OR pid LIKE ? OR pack_name LIKE ?)"
-        like = f"%{q}%"
+        sql += (
+            " AND (lower(name) LIKE ? OR lower(COALESCE(club, '')) LIKE ? "
+            "OR lower(COALESCE(nationality, '')) LIKE ? OR lower(pid) LIKE ? "
+            "OR lower(COALESCE(pack_name, '')) LIKE ?)"
+        )
+        like = f"%{q.strip().lower()}%"
         params.extend([like, like, like, like, like])
     if position:
         sql += " AND position = ?"
@@ -409,8 +439,8 @@ def query_players(
         sql += " AND overall >= ?"
         params.append(min_ovr)
     if skill:
-        sql += " AND skills LIKE ?"
-        params.append(f"%{skill}%")
+        sql += " AND lower(COALESCE(skills, '')) LIKE ?"
+        params.append(f"%{skill.strip().lower()}%")
     if sort == "name":
         sql += " ORDER BY name COLLATE NOCASE"
     else:
@@ -434,17 +464,17 @@ def players(
     request: Request,
     q: str = "",
     position: str = "",
-    min_ovr: Optional[int] = None,
+    min_ovr: BlankInt = None,
     skill: str = "",
     sort: str = "overall",
-    card_type: str = "Standard",
+    card_type: str = "",
 ):
     conn = get_db()
     mode = current_mode(request)
     league = selected_league(request, conn)
     rows = [
         player_view(r)
-        for r in query_players(conn, mode, q, position, min_ovr, skill, sort, limit=200, card_type=card_type)
+        for r in query_players(conn, "" if q.strip() else mode, q, position, min_ovr, skill, sort, limit=500, card_type=card_type)
     ]
     attach_market(conn, league, rows)
     meta = meta_map(conn)
@@ -470,11 +500,11 @@ def players_csv(
     request: Request,
     q: str = "",
     position: str = "",
-    min_ovr: Optional[int] = None,
+    min_ovr: BlankInt = None,
     skill: str = "",
     sort: str = "overall",
     all_modes: int = 0,
-    card_type: str = "Standard",
+    card_type: str = "",
 ):
     conn = get_db()
     if all_modes:
@@ -958,7 +988,8 @@ def league_accept_invite(request: Request, slug: str):
         conn.close()
         return RedirectResponse(f"/league/{slug}?error={quote(str(exc))}", status_code=303)
     conn.close()
-    return RedirectResponse(f"/league/{slug}?message={quote('Invitation accepted')}", status_code=303)
+    response = RedirectResponse(f"/market?message={quote('You are in the league. Sign available players here.')}", status_code=303)
+    return set_league_cookie(response, slug)
 
 
 @app.get("/league/{slug}/organize", response_class=HTMLResponse)
@@ -1277,18 +1308,26 @@ def market_page(
     request: Request,
     q: str = "",
     position: str = "",
-    min_ovr: Optional[int] = None,
+    min_ovr: BlankInt = None,
     status: str = "",
-    card_type: str = "Standard",
+    card_type: str = "",
     message: str = "",
     error: str = "",
 ):
     conn = get_db()
     league = selected_league(request, conn)
+    user = current_user(request, conn)
+    my_team = manager_team(conn, league["id"], user["id"]) if user and league else None
+    if not my_team:
+        conn.close()
+        return RedirectResponse(
+            f"/leagues?message={quote('Join a league first. After you are in a club, the market opens.')}",
+            status_code=303,
+        )
     mode = current_mode(request)
     rows = [
         player_view(r)
-        for r in query_players(conn, mode, q, position, min_ovr, limit=120, card_type=card_type)
+        for r in query_players(conn, "" if q.strip() else mode, q, position, min_ovr, limit=500, card_type=card_type)
     ]
     attach_market(conn, league, rows)
     if status:
@@ -1480,3 +1519,8 @@ def offer_decide(request: Request, offer_id: int, accept: str = Form("0")):
 @app.get("/health")
 def health():
     return {"ok": True}
+
+
+from web.api import router as api_router
+
+app.include_router(api_router)

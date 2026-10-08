@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}Manager Desk{% endblock %} · PES Data</title>
-  <link rel="stylesheet" href="/static/app.css?v=8">
+  <link rel="stylesheet" href="/static/app.css?v=9">
   {% block extra_head %}{% endblock %}
 </head>
 <body class="{% block body_class %}{% endblock %}">
@@ -13,12 +13,12 @@
     <nav>
       <a href="/">Home</a>
       <a href="/leagues">Leagues</a>
-      <a href="/market">Market</a>
+      {% if my_team %}<a href="/market">Market</a>{% endif %}
       {% if my_team %}<a href="/squad">Squad</a>{% endif %}
-      <a href="/players">Catalog</a>
+      <a href="/players">Players</a>
     </nav>
-    <form class="quick-search" action="/market" method="get">
-      <input type="search" name="q" placeholder="Find a player to sign" value="{{ q|default('') }}">
+    <form class="quick-search" action="/players" method="get">
+      <input type="search" name="q" placeholder="Search players" value="{{ q|default('') }}">
       <button type="submit">Search</button>
     </form>
     <div class="account">

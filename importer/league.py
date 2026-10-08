@@ -8,6 +8,8 @@ import sqlite3
 from datetime import datetime, timedelta
 from pathlib import Path
 
+from importer.db import league_schema_sql  # noqa: E402
+
 SCHEMA_PATH = Path(__file__).with_name("league_schema.sql")
 SESSION_DAYS = 30
 WINDOW_KINDS = {
@@ -30,7 +32,7 @@ COMPETITION_KINDS = {
 
 
 def init_league_db(conn: sqlite3.Connection) -> None:
-    conn.executescript(SCHEMA_PATH.read_text(encoding="utf-8"))
+    conn.executescript(league_schema_sql(conn))
     columns = {row[1] for row in conn.execute("PRAGMA table_info(users)")}
     if "google_sub" not in columns:
         conn.execute("ALTER TABLE users ADD COLUMN google_sub TEXT")
@@ -291,7 +293,7 @@ def attach_market(conn: sqlite3.Connection, league: dict | None, players: list[d
     if not league:
         for player in players:
             player["market_price"] = base_price(player.get("overall"), player.get("card_type") or "")
-            player["market_status"] = {"code": "catalog", "label": "Catalog"}
+            player["market_status"] = {"code": "free", "label": "Available"}
         return players
     for player in players:
         status = player_status(conn, league["id"], player["pid"])
@@ -1440,9 +1442,9 @@ def ensure_practice_league(conn: sqlite3.Connection) -> dict:
         stale = conn.execute(
             """
             SELECT 1 FROM league_windows
-            WHERE league_id = ? AND (title LIKE 'Open sea%' OR title LIKE '%first legs%')
+            WHERE league_id = ? AND (title LIKE ? OR title LIKE ?)
             """,
-            (league["id"],),
+            (league["id"], "Open sea%", "%first legs%"),
         ).fetchone()
         if stale or not league.get("weeks"):
             apply_season_calendar(conn, {**league, "weeks": league.get("weeks") or 6})

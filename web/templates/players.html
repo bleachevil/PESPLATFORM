@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block title %}{{ mode_label }} players{% endblock %}
 {% block content %}
-<h1>{{ mode_label }} players</h1>
-<p class="lede">Standard cards only by default. Switch the card filter if you need featured or special packs.</p>
+<h1>Players</h1>
+<p class="lede">Everyone in the database{% if league %}, with Available / Signed status for {{ league.name }}{% endif %}. Join a league to sign from the market.</p>
 <form class="filters" method="get" action="/players">
   <input type="search" name="q" value="{{ q }}" placeholder="Name, club, nationality, pack">
   <select name="position">
@@ -13,8 +13,8 @@
   </select>
   <input type="number" name="min_ovr" value="{{ min_ovr }}" placeholder="Min OVR" min="40" max="120">
   <select name="card_type">
-    <option value="Standard" {% if card_type == 'Standard' %}selected{% endif %}>Standard only</option>
     <option value="" {% if not card_type %}selected{% endif %}>All cards</option>
+    <option value="Standard" {% if card_type == 'Standard' %}selected{% endif %}>Standard only</option>
     {% for kind in card_types %}
     {% if kind != 'Standard' %}
     <option value="{{ kind }}" {% if card_type == kind %}selected{% endif %}>{{ kind }}</option>
@@ -44,10 +44,8 @@
       <th>OVR</th>
       <th>MAX</th>
       <th>Max Lv</th>
-      {% if league %}
       <th>Price</th>
       <th>Status</th>
-      {% endif %}
     </tr>
   </thead>
   <tbody>
@@ -55,11 +53,13 @@
     <tr>
       <td><span class="pos sm">{{ p.position }}</span></td>
       <td>
-        <a class="name-with-face" href="/players/{{ p.slug }}">
+        <div class="player-cell">
           <img class="face sm" src="{{ p.image_url }}" alt="">
-          {{ p.name }}
-        </a>
-        <span class="card-type">{{ p.card_type }}</span>
+          <div class="meta">
+            <a href="/players/{{ p.slug }}">{{ p.name }}</a>
+            <span class="card-type">{{ p.card_type }}</span>
+          </div>
+        </div>
       </td>
       <td>{% if p.team_slug %}<a href="/teams/{{ p.team_slug }}">{{ p.club }}</a>{% else %}{{ p.club }}{% endif %}</td>
       <td>
@@ -72,15 +72,13 @@
       <td class="num">{{ p.overall }}</td>
       <td class="num dim">{{ p.max_overall }}{% if p.ovr_gain %} <span class="stat-incr">+{{ p.ovr_gain }}</span>{% endif %}</td>
       <td class="num dim">{{ p.level }}/{{ p.max_level }}</td>
-      {% if league %}
       <td class="num">{{ p.market_price }}M</td>
       <td><span class="status {{ p.market_status.code }}">{{ p.market_status.label }}</span></td>
-      {% endif %}
     </tr>
     {% endfor %}
   </tbody>
 </table>
 {% if not players %}
-<p class="empty">No matches in {{ mode_label }}. Try the other database or <a href="/import">import players</a>.</p>
+<p class="empty">{% if q %}No players match “{{ q }}”. Try another name, or set the card filter to All cards.{% else %}No matches in {{ mode_label }}. Try the other database or <a href="/import">import players</a>.{% endif %}</p>
 {% endif %}
 {% endblock %}

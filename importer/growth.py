@@ -137,11 +137,14 @@ SECONDARY_POSITIONS = {
 }
 
 POS_GRID_LAYOUT = [
-    ["LWF", "CF", "RWF"],
-    ["LMF", "AMF", "RMF"],
-    [None, "CMF", None],
-    ["LB", "CB", "RB"],
+    [None, "CF", None],
+    ["LWF", None, "RWF"],
+    [None, "SS", None],
+    [None, "AMF", None],
+    ["LMF", "CMF", "RMF"],
     [None, "DMF", None],
+    [None, "CB", None],
+    ["LB", None, "RB"],
     [None, "GK", None],
 ]
 
@@ -194,9 +197,9 @@ def position_familiarity(primary: str, secondaries: list[str], pos: str) -> int:
 def familiarity_tone(value: int) -> str:
     if value >= 86:
         return "high"
-    if value >= 72:
+    if value >= 80:
         return "mid"
-    if value >= 60:
+    if value >= 70:
         return "ok"
     return "low"
 
