@@ -1,0 +1,215 @@
+﻿国籍编号,序号,头部,韩文,日文,西班牙文,意大利文,英文,泰文,法文,土耳其文,葡萄牙文,德文,三字代码,球员卡数
+1,0,ba04281901130000,아프가니스탄,アフガニスタン,Afganistán,Afghanistan,Afghanistan,อัฟกานิสถาน,Afghanistan,Afganistan,Afeganistão,Afghanistan,AFG,7
+2,1,bc08981001130000,바레인,バーレーン,Bahréin,Bahrain,Bahrain,บาห์เรน,Bahreïn,Bahreyn,Barém,Bahrain,BHR,72
+3,2,bd0c681101130000,방글라데시,バングラデシュ,Bangladesh,Bangladesh,Bangladesh,บังกลาเทศ,Bangladesh,Bangladeş,Bangladesh,Bangladesch,BAN,27
+4,3,be10000301130000,부탄,ブータン,Bután,Bhutan,Bhutan,ภูฏาน,Bhoutan,Butan,Butão,Bhutan,BHU,0
+5,4,bf144007010b0000,브루나이,ブルネイ,Brunéi Darussalam,Brunei,Brunei,บรูไน,Brunei,Brunei,Brunei,Brunei Darussalam,BRU,47
+6,5,c018b005010b0000,캄보디아,カンボジア,Camboya,Cambogia,Cambodia,กัมพูชา,Cambodge,Kamboçya,Camboja,Kambodscha,CAM,84
+7,6,c11ca05c010b0000,중국,中国,RP China,Cina,China PR,สาธารณรัฐประชาชนจีน,RP Chine,Çin,RP da China,VR China,CHN,322
+8,7,c420a05c010b0000,"홍콩, 중국",香港，中国,"Hong Kong, China","Hong Kong, Cina","Hong Kong, China","ฮ่องกง, จีน","Hong Kong, Chine","Hong Kong, Çin","Hong Kong, China","Hongkong, China",HKG,136
+9,8,c524781401130000,인도,インド,India,India,India,อินเดีย,Inde,Hindistan,Índia,Indien,IND,149
+10,9,c628f814010b0000,인도네시아,インドネシア,Indonesia,Indonesia,Indonesia,อินโดนีเซีย,Indonésie,Endonezya,Indonésia,Indonesien,IDN,229
+11,10,c72c602301130000,이란,イラン,RI de Irán,Iran,IR Iran,สาธารณรัฐอิสลามอิหร่าน,RI Iran,İran,Irão,IR Iran,IRN,258
+12,11,c830982001130000,이라크,イラク,Irak,Iraq,Iraq,อิรัก,Irak,Irak,Iraque,Irak,IRQ,232
+13,12,c9343055010b0000,일본,日本,Japón,Giappone,Japan,ญี่ปุ่น,Japon,Japonya,Japão,Japan,JPN,3510
+14,13,ca38981001130000,요르단,ヨルダン,Jordania,Giordania,Jordan,จอร์แดน,Jordanie,Ürdün,Jordânia,Jordanien,JOR,189
+15,14,cb3cf855010b0000,북한,北朝鮮,RPD de Corea,Corea del Nord,Korea DPR,สปป. เกาหลี,RDP Corée,Kuzey Kore,RPD da Coreia,DVR Korea,PRK,51
+16,15,dc40f855010b0000,대한민국,韓国,República de Corea,Repubblica di Corea,Korea Republic,สาธารณรัฐเกาหลี,République de Corée,Güney Kore,República da Coreia,Republik Korea,KOR,1086
+17,16,cc44981001130000,쿠웨이트,クウェート,Kuwait,Kuwait,Kuwait,คูเวต,Koweït,Kuveyt,Kuwait,Kuwait,KUW,96
+18,17,ce486016010b0000,라오스,ラオス,Laos,Laos,Laos,ลาว,Laos,Laos,Laos,Laos,LAO,28
+19,18,cf4c980001130000,레바논,レバノン,Líbano,Libano,Lebanon,เลบานอน,Liban,Lübnan,Líbano,Libanon,LIB,28
+20,19,d050a00c010b0000,마카오,マカオ,Macao,Macao,Macau,มาเก๊า,Macao,Makao,Macau,Macau,MAC,1
+21,20,d1544017010b0000,말레이시아,マレーシア,Malasia,Malaysia,Malaysia,มาเลเซีย,Malaisie,Malezya,Malásia,Malaysia,MAS,621
+22,21,d258d01201130000,몰디브,モルディブ,Maldivas,Maldive,Maldives,มัลดีฟส์,Maldives,Maldivler,Maldivas,Malediven,MDV,0
+23,22,d35ca007010b0000,몽골,モンゴル,Mongolia,Mongolia,Mongolia,มองโกเลีย,Mongolie,Moğolistan,Mongólia,Mongolei,MNG,1
+24,23,d460d851010b0000,미얀마,ミャンマー,Birmania,Myanmar,Myanmar,เมียนมา,Myanmar,Myanmar,Myanmar,Myanmar,MYA,34
+25,24,d564100801130000,네팔,ネパール,Nepal,Nepal,Nepal,เนปาล,Népal,Nepal,Nepal,Nepal,NEP,27
+26,25,d768981001130000,오만,オマーン,Omán,Oman,Oman,โอมาน,Oman,Umman,Omã,Oman,OMA,129
+27,26,d86ce01b01130000,파키스탄,パキスタン,Pakistán,Pakistan,Pakistan,ปากีสถาน,Pakistan,Pakistan,Paquistão,Pakistan,PAK,1
+28,27,d970982001130000,팔레스타인,パレスチナ,Palestina,Palestina,Palestine,ปาเลสไตน์,Palestine,Filistin,Palestina,Palästina,PLE,37
+29,28,da747813010b0000,필리핀,フィリピン,Filipinas,Filippine,Philippines,ฟิลิปปินส์,Philippines,Filipinler,Filipinas,Philippinen,PHI,136
+30,29,db78981001130000,카타르,カタール,Qatar,Qatar,Qatar,กาตาร์,Qatar,Katar,Catar,Katar,QAT,316
+31,30,dd7c981001130000,사우디아라비아,サウジアラビア,Arabia Saudita,Arabia Saudita,Saudi Arabia,ซาอุดีอาระเบีย,Arabie Saoudite,Suudi Arabistan,Arábia Saudita,Saudi-Arabien,KSA,278
+32,31,de800850010b0000,싱가포르,シンガポール,Singapur,Singapore,Singapore,สิงคโปร์,Singapour,Singapur,Singapura,Singapur,SGP,102
+33,32,df84d01901130000,스리랑카,スリランカ,Sri Lanka,Sri Lanka,Sri Lanka,ศรีลังกา,Sri Lanka,Sri Lanka,Sri Lanka,Sri Lanka,SRI,0
+34,33,e088981001130000,시리아,シリア,Siria,Siria,Syria,ซีเรีย,Syrie,Suriye,Síria,Syrien,SYR,22
+36,34,e290f85a010b0000,태국,タイ,Tailandia,Tailandia,Thailand,ไทย,Thaïlande,Tayland,Tailândia,Thailand,THA,870
+37,35,e594981001130000,아랍에미리트,アラブ首長国連邦,Emiratos Árabes Unidos,Emirati Arabi Uniti,United Arab Emirates,สหรัฐอาหรับเอมิเรตส์,Émirats Arabes Unis,Birleşik Arap Emirl.,Emirados Árabes Unidos,Verein. Arab. Emirate,UAE,192
+38,36,e798005c010b0000,베트남,ベトナム,Vietnam,Vietnam,Vietnam,เวียดนาม,Vietnam,Vietnam,Vietname,Vietnam,VIE,127
+39,37,e89c981001130000,예멘,イエメン,Yemen,Yemen,Yemen,เยเมน,Yémen,Yemen,Iémen,Jemen,YEM,2
+40,38,cda0d02502130000,키르기스스탄,キルギス,República Kirguisa,Kirghizistan,Kyrgyz Republic,สาธารณรัฐคีร์กีซ,République kirghize,Kırgızistan,Quirguistão,Kirgisische Republik,KGZ,26
+41,39,e1a4e82a02130000,타지키스탄,タジキスタン,Tayikistán,Tagikistan,Tajikistan,ทาจิกิสถาน,Tadjikistan,Tacikistan,Tajiquistão,Tadschikistan,TJK,43
+42,40,e4a8802b02130000,투르크메니스탄,トルクメニスタン,Turkmenistán,Turkmenistan,Turkmenistan,เติร์กเมนิสถาน,Turkménistan,Türkmenistan,Turcomenistão,Turkmenistan,TKM,89
+43,41,e3ace01a010b0000,동티모르,東ティモール,Timor Oriental,Timor Est,Timor-Leste,ติมอร์-เลสเต,Timor oriental,Doğu Timor,Timor-Leste,Osttimor,TLS,29
+44,42,41b0983003050000,알제리,アルジェリア,Argelia,Algeria,Algeria,แอลจีเรีย,Algérie,Cezayir,Argélia,Algerien,ALG,221
+45,43,42b4200903050000,앙골라,アンゴラ,Angola,Angola,Angola,แองโกลา,Angola,Angola,Angola,Angola,ANG,67
+46,44,44b8900303050000,베냉,ベナン,Benín,Benin,Benin,เบนิน,Bénin,Benin,Benim,Benin,BEN,40
+47,45,45bc080003050000,보츠와나,ボツワナ,Botsuana,Botswana,Botswana,บอตสวานา,Botswana,Botsvana,Botsuana,Botsuana,BOT,62
+48,46,47c0900303050000,부르키나파소,ブルキナファソ,Burkina Faso,Burkina Faso,Burkina Faso,บูร์กินาฟาโซ,Burkina Faso,Burkina Faso,Burkina Faso,Burkina Faso,BFA,98
+49,47,48c4680903050000,부룬디,ブルンジ,Burundi,Burundi,Burundi,บุรุนดี,Burundi,Burundi,Burundi,Burundi,BDI,8
+50,48,49c8900303050000,카메룬,カメルーン,Camerún,Camerun,Cameroon,แคเมอรูน,Cameroun,Kamerun,Camarões,Kamerun,CMR,236
+51,49,4acc200903050000,카보베르데,カーボベルデ,Cabo Verde,Capo Verde,Cabo Verde,กาบูเวร์ดี,Cap-Vert,Cabo Verde,Cabo Verde,Kap Verde,CPV,76
+52,50,4bd0800903050000,중앙아프리카 공화국,中央アフリカ,Rep. Centroafricana,Rep. Centrafricana,Central African Rep.,สาธารณรัฐแอฟริกากลาง,Rép. centrafricaine,Orta Afrika Cumhuriyeti,Rep. Centro-Africana,Zentralafrikan. Rep.,CTA,12
+53,51,4cd4980003050000,차드,チャド,Chad,Ciad,Chad,ชาด,Tchad,Çad,Chade,Tschad,CHA,7
+54,52,4dd8980a03050000,코모로,コモロ,Comoras,Comore,Comoros,คอโมโรส,Comores,Komorlar,Comores,Komoren,COM,44
+55,53,4fdc900303050000,콩고 민주 공화국,コンゴ民主共和国,Rep. Dem. del Congo,Rep. Dem. del Congo,Congo DR,ดีอาร์คองโก,RD Congo,Demokratik Kongo Cumh.,RD Congo,"Kongo, D.R.",COD,140
+56,54,50e0900303050000,코트디부아르,コートジボワール,Costa de Marfil,Costa d'Avorio,Côte d'Ivoire,โกตดิวัวร์,Côte d'Ivoire,Fildişi Sahili,Costa do Marfim,Elfenbeinküste,CIV,354
+57,55,51e4980003050000,지부티,ジブチ,Yibuti,Gibuti,Djibouti,จิบูตี,Djibouti,Cibuti,Djibuti,Dschibuti,DJI,0
+58,56,52e8980003050000,이집트,エジプト,Egipto,Egitto,Egypt,อียิปต์,Égypte,Mısır,Egito,Ägypten,EGY,161
+59,57,53ec500a03050000,적도 기니,赤道ギニア,Guinea Ecuatorial,Guinea Equatoriale,Equatorial Guinea,อิเควทอเรียลกินี,Guinée équatoriale,Ekvator Ginesi,Guiné Equatorial,Äquatorialguinea,EQG,45
+60,58,54f0100b03050000,에리트레아,エリトリア,Eritrea,Eritrea,Eritrea,เอริเทรีย,Érythrée,Eritre,Eritreia,Eritrea,ERI,0
+61,59,56f4880003050000,에티오피아,エチオピア,Etiopía,Etiopia,Ethiopia,เอธิโอเปีย,Éthiopie,Etiyopya,Etiópia,Äthiopien,ETH,1
+62,60,57f8900303050000,가봉,ガボン,Gabón,Gabon,Gabon,กาบอง,Gabon,Gabon,Gabão,Gabun,GAB,83
+63,61,58fc080003050000,감비아,ガンビア,Gambia,Gambia,The Gambia,แกมเบีย,Gambie,Gambiya,Gâmbia,Gambia,GAM,53
+64,62,5900090003050000,가나,ガーナ,Ghana,Ghana,Ghana,กานา,Ghana,Gana,Gana,Ghana,GHA,238
+65,63,5a04910303050000,기니,ギニア,Guinea,Guinea,Guinea,กินี,Guinée,Gine,Guiné,Guinea,GUI,91
+66,64,5b08210903050000,기니비사우,ギニアビサウ,Guinea-Bisáu,Guinea-Bissau,Guinea-Bissau,กินี-บิสเซา,Guinée-Bissau,Guinea-Bissau,Guiné-Bissau,Guinea-Bissau,GNB,33
+67,65,5c0c910a03050000,케냐,ケニア,Kenia,Kenya,Kenya,เคนยา,Kenya,Kenya,Quénia,Kenia,KEN,38
+68,66,5d10490a03050000,레소토,レソト,Lesoto,Lesotho,Lesotho,เลโซโท,Lesotho,Lesotho,Lesoto,Lesotho,LES,0
+69,67,5e14090003050000,라이베리아,リベリア,Liberia,Liberia,Liberia,ไลบีเรีย,Liberia,Liberya,Libéria,Liberia,LBR,11
+70,68,5f18990003050000,리비아,リビア,Libia,Libia,Libya,ลิเบีย,Libye,Libya,Líbia,Libyen,LBY,5
+71,69,601c690703050000,마다가스카르,マダガスカル,Madagascar,Madagascar,Madagascar,มาดากัสการ์,Madagascar,Madagaskar,Madagáscar,Madagaskar,MAD,14
+72,70,6120610803050000,말라위,マラウイ,Malaui,Malawi,Malawi,มาลาวี,Malawi,Malavi,Malawi,Malawi,MWI,2
+73,71,6224910303050000,말리,マリ,Mali,Mali,Mali,มาลี,Mali,Mali,Mali,Mali,MLI,187
+74,72,6328990003050000,모리타니,モーリタニア,Mauritania,Mauritania,Mauritania,มอริเตเนีย,Mauritanie,Moritanya,Mauritânia,Mauretanien,MTN,18
+75,73,642c910303050000,모리셔스,モーリシャス,Mauricio,Mauritius,Mauritius,มอริเชียส,Maurice,Mauritius,Maurícia,Mauritius,MRI,0
+76,74,6630993003050000,모로코,モロッコ,Marruecos,Marocco,Morocco,โมร็อกโก,Maroc,Fas,Marrocos,Marokko,MAR,1062
+77,75,6734210903050000,모잠비크,モザンビーク,Mozambique,Mozambico,Mozambique,โมซัมบิก,Mozambique,Mozambik,Moçambique,Mosambik,MOZ,44
+78,76,6838090003050000,나미비아,ナミビア,Namibia,Namibia,Namibia,นามิเบีย,Namibie,Namibya,Namíbia,Namibia,NAM,4
+79,77,693c910303050000,니제르,ニジェール,Níger,Niger,Niger,ไนเจอร์,Niger,Nijer,Níger,Niger,NIG,8
+80,78,6a40090003050000,나이지리아,ナイジェリア,Nigeria,Nigeria,Nigeria,ไนจีเรีย,Nigeria,Nijerya,Nigéria,Nigeria,NGA,339
+81,79,6c44c90503050000,르완다,ルワンダ,Ruanda,Ruanda,Rwanda,รวันดา,Rwanda,Ruanda,Ruanda,Ruanda,RWA,9
+82,80,6e48210903050000,상투메 프린시페,サントメ・プリンシペ,Santo Tomé y Príncipe,São Tomé e Príncipe,São Tomé and Príncipe,เซาตูเมและปรินซีปี,São Tomé-et-Príncipe,São Tomé ve Príncipe,São Tomé e Príncipe,São Tomé und Príncipe,STP,1
+83,81,6f4c910303050000,세네갈,セネガル,Senegal,Senegal,Senegal,เซเนกัล,Sénégal,Senegal,Senegal,Senegal,SEN,406
+84,82,7050810203050000,세이셸,セーシェル,Seychelles,Seychelles,Seychelles,เซเชลส์,Seychelles,Seyşeller,Seicheles,Seychellen,SEY,0
+85,83,7154090003050000,시에라리온,シエラレオネ,Sierra Leona,Sierra Leone,Sierra Leone,เซียร์ราลีโอน,Sierra Leone,Sierra Leone,Serra Leoa,Sierra Leone,SLE,17
+86,84,7258390a03050000,소말리아,ソマリア,Somalia,Somalia,Somalia,โซมาเลีย,Somalie,Somali,Somália,Somalia,SOM,31
+87,85,735c493003050000,남아프리카,南アフリカ,Sudáfrica,Sudafrica,South Africa,แอฟริกาใต้,Afrique du Sud,Güney Afrika,África do Sul,Südafrika,RSA,96
+88,86,7560990003050000,수단,スーダン,Sudán,Sudan,Sudan,ซูดาน,Soudan,Sudan,Sudão,Sudan,SDN,32
+89,87,5564690a03050000,에스와티니,エスワティニ,Esuatini,Eswatini,Eswatini,เอสวาตินี,Eswatini,Esvatini,Essuatíni,Swasiland,SWZ,0
+90,88,7668910a03050000,탄자니아,タンザニア,Tanzania,Tanzania,Tanzania,แทนซาเนีย,Tanzanie,Tanzanya,Tanzânia,Tansania,TAN,34
+91,89,776c910303050000,토고,トーゴ,Togo,Togo,Togo,โตโก,Togo,Togo,Togo,Togo,TOG,22
+92,90,7870993003050000,튀니지,チュニジア,Túnez,Tunisia,Tunisia,ตูนิเซีย,Tunisie,Tunus,Tunísia,Tunesien,TUN,131
+93,91,7974910a03050000,우간다,ウガンダ,Uganda,Uganda,Uganda,ยูกันดา,Ouganda,Uganda,Uganda,Uganda,UGA,48
+94,92,7b78090003050000,잠비아,ザンビア,Zambia,Zambia,Zambia,แซมเบีย,Zambie,Zambiya,Zâmbia,Sambia,ZAM,67
+95,93,7d7c090003050000,짐바브웨,ジンバブエ,Zimbabue,Zimbabwe,Zimbabwe,ซิมบับเว,Zimbabwe,Zimbabve,Zimbabué,Simbabwe,ZIM,66
+98,94,4e88910303050000,콩고,コンゴ,Congo,Repubblica del Congo,Congo,คองโก,Congo,Kongo,Congo,Kongo,CGO,27
+103,95,7e9c090004060000,앵귈라,アンギラ,Anguilla,Anguilla,Anguilla,แองกวิลลา,Anguilla,Anguilla,Anguilla,Anguilla,AIA,0
+104,96,7fa0090004060000,앤티가 바부다,アンティグア・バーブーダ,Antigua y Barbuda,Antigua e Barbuda,Antigua and Barbuda,แอนทีกาและบาร์บิวดา,Antigua-et-Barbuda,Antigua ve Barbuda,Antígua e Barbuda,Antigua und Barbuda,ATG,5
+105,97,80a4f10204060000,아루바,アルバ,Aruba,Aruba,Aruba,อารูบา,Aruba,Aruba,Aruba,Aruba,ARU,1
+106,98,81a8090004060000,바하마,バハマ,Bahamas,Bahamas,Bahamas,บาฮามาส,Bahamas,Bahamalar,Baamas,Bahamas,BAH,0
+107,99,82ac090004060000,바베이도스,バルバドス,Barbados,Barbados,Barbados,บาร์เบโดส,Barbade,Barbados,Barbados,Barbados,BRB,3
+108,100,83b0090004060000,벨리즈,ベリーズ,Belice,Belize,Belize,เบลีซ,Bélize,Belize,Belize,Belize,BLZ,0
+109,101,84b4090004060000,버뮤다,バミューダ,Bermudas,Bermuda,Bermuda,เบอร์มิวดา,Bermudes,Bermuda,Bermudas,Bermuda,BER,1
+110,102,86b8093004060000,캐나다,カナダ,Canadá,Canada,Canada,แคนาดา,Canada,Kanada,Canadá,Kanada,CAN,214
+111,103,87bc090004060000,케이맨 제도,ケイマン諸島,Islas Caimán,Isole Cayman,Cayman Islands,หมู่เกาะเคย์แมน,Îles Caïmans,Cayman Adaları,Ilhas Caimão,Kaimaninseln,CAY,2
+112,104,88c0512a04060000,코스타리카,コスタリカ,Costa Rica,Costa Rica,Costa Rica,คอสตาริกา,Costa Rica,Kosta Rika,Costa Rica,Costa Rica,CRC,47
+113,105,89c4510a04060000,쿠바,キューバ,Cuba,Cuba,Cuba,คิวบา,Cuba,Küba,Cuba,Kuba,CUB,13
+114,106,8bc8090004060000,도미니카 연방,ドミニカ,Dominica,Dominica,Dominica,ดอมินีกา,Dominique,Dominika,Dominica,Dominica,DMA,0
+115,107,8ccc510a04060000,도미니카 공화국,ドミニカ共和国,República Dominicana,Repubblica Dominicana,Dominican Republic,สาธารณรัฐโดมินิกัน,République dominicaine,Dominik Cumhuriyeti,República Dominicana,Dominikanische Republik,DOM,17
+116,108,8dd0510a04060000,엘살바도르,エルサルバドル,El Salvador,El Salvador,El Salvador,เอลซัลวาดอร์,Salvador,El Salvador,El Salvador,El Salvador,SLV,22
+117,109,90d4090004060000,그레나다,グレナダ,Granada,Grenada,Grenada,กรีเนดา,Grenade,Grenada,Granada,Grenada,GRN,7
+119,110,92dc512a04060000,과테말라,グアテマラ,Guatemala,Guatemala,Guatemala,กัวเตมาลา,Guatemala,Guatemala,Guatemala,Guatemala,GUA,36
+120,111,94e0410404060000,아이티,ハイチ,Haití,Haiti,Haiti,เฮติ,Haïti,Haiti,Haiti,Haiti,HAI,65
+121,112,95e4511a04060000,온두라스,ホンジュラス,Honduras,Honduras,Honduras,ฮอนดูรัส,Honduras,Honduras,Honduras,Honduras,HON,44
+122,113,96e8090004060000,자메이카,ジャマイカ,Jamaica,Giamaica,Jamaica,จาเมกา,Jamaïque,Jamaika,Jamaica,Jamaika,JAM,126
+124,114,98f0512a04060000,멕시코,メキシコ,México,Messico,Mexico,เม็กซิโก,Mexique,Meksika,México,Mexiko,MEX,452
+125,115,99f4090004060000,몬트세랫,モントセラト,Montserrat,Montserrat,Montserrat,มอนต์เซอร์รัต,Montserrat,Montserrat,Montserrat,Montserrat,MSR,2
+127,116,9bfc510a04060000,니카라과,ニカラグア,Nicaragua,Nicaragua,Nicaragua,นิการากัว,Nicaragua,Nikaragua,Nicarágua,Nicaragua,NCA,0
+128,117,9c00522a04060000,파나마,パナマ,Panamá,Panama,Panama,ปานามา,Panama,Panama,Panamá,Panama,PAN,49
+129,118,9d04521a04060000,푸에르토리코,プエルトリコ,Puerto Rico,Porto Rico,Puerto Rico,เปอร์โตรีโก,Porto Rico,Porto Riko,Porto Rico,Puerto Rico,PUR,12
+130,119,9f080a0004060000,세인트키츠 네비스,セントクリストファー・ネイビス,San Cristóbal y Nieves,Saint Kitts e Nevis,St Kitts and Nevis,เซนต์คิตส์และเนวิส,St-Christophe-et-Niévès,St Kitts ve Nevis,São Cristóvão e Nevis,St. Kitts und Nevis,SKN,3
+131,120,a00c0a0004060000,세인트루시아,セントルシア,Santa Lucía,Santa Lucia,Saint Lucia,เซนต์ลูเชีย,Sainte-Lucie,Saint Lucia,Santa Lúcia,Sankt Lucia,LCA,2
+132,121,a3100a0004060000,세인트빈센트 그레나딘,セントビンセントおよびグレナディーン諸島,S. Vicente y Granadinas,St. Vincent e Grenadine,St Vincent & Grenadines,เซนต์วินเซนต์เกรนาดีนส์,St Vincent & Grenadines,St. Vin. ve Grenadinler,S. Vicente e Granad.,St. Vincent & Grenad.,VIN,4
+133,122,a6140a1004060000,트리니다드 토바고,トリニダード・トバゴ,Trinidad y Tobago,Trinidad e Tobago,Trinidad and Tobago,ตรินิแดดและโตเบโก,Trinité-et-Tobago,Trinidad ve Tobago,Trindade e Tobago,Trinidad und Tobago,TRI,23
+134,123,a7180a0004060000,터크스 케이커스 제도,タークス・カイコス諸島,Islas Turcas y Caicos,Isole Turks e Caicos,Turks and Caicos Is.,หมู่เกาะเติกส์และเคคอส,Îles Turques-et-Caïques,Turks ve Caicos Adaları,I. Turcas e Caicos,Turks- und Caicosins.,TCA,0
+135,124,aa1c0a2004060000,미국,アメリカ,Estados Unidos,Stati Uniti,United States,สหรัฐอเมริกา,États-Unis,ABD,Estados Unidos,USA,USA,1443
+136,125,85200a0004060000,영국령 버진아일랜드,英領バージン諸島,Islas Vírgenes Brit.,Isole Vergini Brit.,British Virgin Islands,หมู่เกาะบริติชเวอร์จิน,Îles Vierges brit.,Britanya Virjin Adaları,Ilhas Virgens Brit.,Brit. Jungferninseln,VGB,0
+137,126,a9240a0004060000,미국령 버진아일랜드,米領バージン諸島,Islas Vírgenes EE.UU.,Isole Vergini Americane,US Virgin Islands,หมู่เกาะเวอร์จิน สหรัฐ,Îles Vierges É-U,ABD Virjin Adaları,Ilhas Virgens (EUA),Amerik. Jungferninseln,VIR,0
+139,127,a52cf20205060000,수리남,スリナム,Surinam,Suriname,Suriname,ซูรินาม,Suriname,Surinam,Suriname,Suriname,SUR,61
+140,128,8a30f20204060000,퀴라소,キュラソー,Curazao,Curaçao,Curaçao,กูราเซา,Curaçao,Curaçao,Curaçau,Curaçao,CUW,61
+144,129,ab40524a05040000,아르헨티나,アルゼンチン,Argentina,Argentina,Argentina,อาร์เจนตินา,Argentine,Arjantin,Argentina,Argentinien,ARG,2243
+145,130,ac44522a05040000,볼리비아,ボリビア,Bolivia,Bolivia,Bolivia,โบลิเวีย,Bolivie,Bolivya,Bolívia,Bolivien,BOL,40
+146,131,ae48222905040000,브라질,ブラジル,Brasil,Brasile,Brazil,บราซิล,Brésil,Brezilya,Brasil,Brasilien,BRA,3543
+147,132,af4c524a05040000,칠레,チリ,Chile,Cile,Chile,ชิลี,Chili,Şili,Chile,Chile,CHI,773
+148,133,b050522a05040000,콜롬비아,コロンビア,Colombia,Colombia,Colombia,โคลอมเบีย,Colombie,Kolombiya,Colômbia,Kolumbien,COL,1170
+149,134,b154521a05040000,에콰도르,エクアドル,Ecuador,Ecuador,Ecuador,เอกวาดอร์,Équateur,Ekvador,Equador,Ecuador,ECU,163
+150,135,b558524a05040000,파라과이,パラグアイ,Paraguay,Paraguay,Paraguay,ปารากวัย,Paraguay,Paraguay,Paraguai,Paraguay,PAR,162
+151,136,b65c522a05040000,페루,ペルー,Perú,Perù,Peru,เปรู,Pérou,Peru,Peru,Peru,PER,57
+152,137,b860523a05040000,우루과이,ウルグアイ,Uruguay,Uruguay,Uruguay,อุรุกวัย,Uruguay,Uruguay,Uruguai,Uruguay,URU,453
+153,138,b964522a05040000,베네수엘라,ベネズエラ,Venezuela,Venezuela,Venezuela,เวเนซุเอลา,Venezuela,Venezuela,Venezuela,Venezuela,VEN,93
+159,139,937c0a0005060000,가이아나,ガイアナ,Guyana,Guyana,Guyana,กายอานา,Guyana,Guyana,Guiana,Guyana,GUY,5
+161,140,e9840a0006070000,미국령 사모아,米領サモア,Samoa Americana,Samoa Americane,American Samoa,อเมริกันซามัว,Samoa américaines,Amerikan Samoası,Samoa Americana,Amerikanisch-Samoa,ASA,0
+162,141,bb880a40060b0000,호주,オーストラリア,Australia,Australia,Australia,ออสเตรเลีย,Australie,Avustralya,Austrália,Australien,AUS,376
+163,142,ec8c220706070000,쿡 제도,クック諸島,Islas Cook,Isole Cook,Cook Islands,หมู่เกาะคุก,Îles Cook,Cook Adaları,Ilhas Cook,Cookinseln,COK,0
+164,143,ed900a1006070000,피지,フィジー,Fiyi,Fiji,Fiji,ฟีจี,Fidji,Fiji,Fiji,Fidschi,FIJ,1
+165,144,f394922306070000,누벨칼레도니,ニューカレドニア,Nueva Caledonia,Nuova Caledonia,New Caledonia,นิวแคลิโดเนีย,Nouvelle-Calédonie,Yeni Kaledonya,Nova Caledónia,Neukaledonien,NCL,27
+166,145,f4980a4006070000,뉴질랜드,ニュージーランド,Nueva Zelanda,Nuova Zelanda,New Zealand,นิวซีแลนด์,Nouvelle-Zélande,Yeni Zelanda,Nova Zelândia,Neuseeland,NZL,62
+167,146,f89c0a1006070000,파푸아뉴기니,パプア・ニューギニア,Papúa Nueva Guinea,Papua Nuova Guinea,Papua New Guinea,ปาปัวนิวกินี,Papouasie-Nvl-Guinée,Papua Yeni Gine,Papua-Nova Guiné,Papua-Neuguinea,PNG,0
+168,147,faa0121a06070000,사모아,サモア,Samoa,Samoa,Samoa,ซามัว,Samoa,Samoa,Samoa,Samoa,SAM,0
+169,148,fba40a1006070000,솔로몬 제도,ソロモン諸島,Islas Salomón,Isole Solomon,Solomon Islands,หมู่เกาะโซโลมอน,Îles Salomon,Solomon Adaları,Ilhas Salomão,Salomonen,SOL,0
+170,149,fca8921306070000,타히티,タヒチ,Tahití,Tahiti,Tahiti,ตาฮีตี,Tahiti,Tahiti,Taiti,Tahiti,TAH,0
+171,150,feac520b06070000,통가,トンガ,Tonga,Tonga,Tonga,ตองกา,Tonga,Tonga,Tonga,Tonga,TGA,0
+172,151,00b19a0106070000,바누아투,バヌアツ,Vanuatu,Vanuatu,Vanuatu,วานูวาตู,Vanuatu,Vanuatu,Vanuatu,Vanuatu,VAN,0
+176,152,c3c00a00060b0000,괌,グアム,Guam,Guam,Guam,กวม,Guam,Guam,Guam,Guam,GUM,0
+184,153,f7e0ea0806070000,팔라우,パラオ,Palaos,Palau,Palau,ปาเลา,Palaos,Palau,Palau,Palau,PLW,0
+189,154,1ff45a2401020000,이스라엘,イスラエル,Israel,Israele,Israel,อิสราเอล,Israël,İsrail,Israel,Israel,ISR,56
+190,155,3df89a4b01020000,튀르키예,トルコ,Türkiye,Türkiye,Türkiye,ทูร์เคีย,Türkiye,Türkiye,Türkiye,Türkei,TUR,1025
+191,156,02fc6a4002020000,알바니아,アルバニア,Albania,Albania,Albania,แอลเบเนีย,Albanie,Arnavutluk,Albânia,Albanien,ALB,113
+192,157,0400fb4102020000,안도라,アンドラ,Andorra,Andorra,Andorra,อันดอร์รา,Andorre,Andorra,Andorra,Andorra,AND,2
+193,158,0504b34002020000,아르메니아,アルメニア,Armenia,Armenia,Armenia,อาร์เมเนีย,Arménie,Ermenistan,Arménia,Armenien,ARM,26
+194,159,0608cb4302020000,오스트리아,オーストリア,Austria,Austria,Austria,ออสเตรีย,Autriche,Avusturya,Áustria,Österreich,AUT,179
+195,160,070c0b4102020000,아제르바이잔,アゼルバイジャン,Azerbaiyán,Azerbaigian,Azerbaijan,อาเซอร์ไบจาน,Azerbaïdjan,Azerbaycan,Azerbaijão,Aserbaidschan,AZE,34
+196,161,08105b4102020000,벨라루스,ベラルーシ,Bielorrusia,Bielorussia,Belarus,เบลารุส,Biélorussie,Belarus,Bielorrússia,Belarus,BLR,3
+197,162,0914f33202020000,벨기에,ベルギー,Bélgica,Belgio,Belgium,เบลเยียม,Belgique,Belçika,Bélgica,Belgien,BEL,778
+198,163,0a18ab4102020000,보스니아 헤르체고비나,ボスニア・ヘルツェゴビナ,Bosnia-Herzegovina,Bosnia ed Herzegovina,Bosnia and Herzegovina,บอสเนียและเฮอร์เซโกวีนา,Bosnie-et-Herzégovine,Bosna Hersek,Bósnia e Herzegovina,Bosnien und Herzegowina,BIH,117
+199,164,0b1cd34102020000,불가리아,ブルガリア,Bulgaria,Bulgaria,Bulgaria,บัลแกเรีย,Bulgarie,Bulgaristan,Bulgária,Bulgarien,BUL,62
+200,165,0d20b34902020000,크로아티아,クロアチア,Croacia,Croazia,Croatia,โครเอเชีย,Croatie,Hırvatistan,Croácia,Kroatien,CRO,283
+201,166,0e24234402020000,키프로스,キプロス,Chipre,Cipro,Cyprus,ไซปรัส,Chypre,Kıbrıs,Chipre,Zypern,CYP,32
+202,167,0f28934202020000,체코,チェコ,República Checa,Cechia,Czechia,เช็กเกีย,Tchéquie,Çekya,República Checa,Tschechien,CZE,132
+203,168,102ca34202020000,덴마크,デンマーク,Dinamarca,Danimarca,Denmark,เดนมาร์ก,Danemark,Danimarka,Dinamarca,Dänemark,DEN,645
+204,169,11300b3002020000,잉글랜드,イングランド,Inglaterra,Inghilterra,England,อังกฤษ,Angleterre,İngiltere,Inglaterra,England,ENG,2135
+205,170,12343b4302020000,에스토니아,エストニア,Estonia,Estonia,Estonia,เอสโตเนีย,Estonie,Estonya,Estónia,Estland,EST,7
+206,171,13385b4302020000,페로 제도,フェロー諸島,Islas Feroe,Isole Faroe,Faroe Islands,หมู่เกาะแฟโร,Îles Féroé,Faroe Adaları,Ilhas Faroé,Färöer,FRO,4
+207,172,143c834302020000,핀란드,フィンランド,Finlandia,Finlandia,Finland,ฟินแลนด์,Finlande,Finlandiya,Finlândia,Finnland,FIN,66
+208,173,1540933302020000,프랑스,フランス,Francia,Francia,France,ฝรั่งเศส,France,Fransa,França,Frankreich,FRA,2310
+209,174,1644c34302020000,조지아,ジョージア,Georgia,Georgia,Georgia,จอร์เจีย,Géorgie,Gürcistan,Geórgia,Georgien,GEO,101
+210,175,1748cb4302020000,독일,ドイツ,Alemania,Germania,Germany,เยอรมนี,Allemagne,Almanya,Alemanha,Deutschland,GER,848
+211,176,194c234402020000,그리스,ギリシャ,Grecia,Grecia,Greece,กรีซ,Grèce,Yunanistan,Grécia,Griechenland,GRE,172
+212,177,1b50a34402020000,헝가리,ハンガリー,Hungría,Ungheria,Hungary,ฮังการี,Hongrie,Macaristan,Hungria,Ungarn,HUN,97
+213,178,1c54c34402020000,아이슬란드,アイスランド,Islandia,Islanda,Iceland,ไอซ์แลนด์,Islande,İzlanda,Islândia,Island,ISL,80
+214,179,1d58eb4302020000,아일랜드,アイルランド,República de Irlanda,Repubblica d'Irlanda,Republic of Ireland,สาธารณรัฐไอร์แลนด์,République d'Irlande,İrlanda,República da Irlanda,Republik Irland,IRL,190
+215,180,205c1b4502020000,이탈리아,イタリア,Italia,Italia,Italy,อิตาลี,Italie,İtalya,Itália,Italien,ITA,2000
+216,181,22609b4502020000,카자흐스탄,カザフスタン,Kazajistán,Kazakistan,Kazakhstan,คาซัคสถาน,Kazakhstan,Kazakistan,Cazaquistão,Kasachstan,KAZ,28
+217,182,2464734602020000,라트비아,ラトビア,Letonia,Lettonia,Latvia,ลัตเวีย,Lettonie,Letonya,Letónia,Lettland,LVA,9
+218,183,2568cb4302020000,리히텐슈타인,リヒテンシュタイン,Liechtenstein,Liechtenstein,Liechtenstein,ลิกเตนสไตน์,Liechtenstein,Lihtenştayn,Liechtenstein,Liechtenstein,LIE,4
+219,184,266c9b4602020000,리투아니아,リトアニア,Lituania,Lituania,Lithuania,ลิทัวเนีย,Lituanie,Litvanya,Lituânia,Litauen,LTU,17
+220,185,2770934302020000,룩셈부르크,ルクセンブルク,Luxemburgo,Lussemburgo,Luxembourg,ลักเซมเบิร์ก,Luxembourg,Lüksemburg,Luxemburgo,Luxemburg,LUX,19
+221,186,2d74e34602020000,북마케도니아,北マケドニア,Macedonia del Norte,Macedonia del Nord,North Macedonia,มาซิโดเนียเหนือ,Macédoine du Nord,Kuzey Makedonya,Macedónia do Norte,Nordmazedonien,MKD,47
+222,187,2878734702020000,몰타,マルタ,Malta,Malta,Malta,มอลตา,Malte,Malta,Malta,Malta,MLT,33
+223,188,297c9b2702020000,몰도바,モルドバ,Moldavia,Moldavia,Moldova,มอลโดวา,Moldavie,Moldova,Moldávia,Moldawien,MDA,8
+224,189,2c80f33202020000,네덜란드,オランダ,Países Bajos,Paesi Bassi,Netherlands,เนเธอร์แลนด์,Pays-Bas,Hollanda,Países Baixos,Niederlande,NED,1341
+225,190,2e840b4002020000,북아일랜드,北アイルランド,Irlanda del Norte,Irlanda del Nord,Northern Ireland,ไอร์แลนด์เหนือ,Irlande du Nord,Kuzey İrlanda,Irlanda do Norte,Nordirland,NIR,87
+226,191,2f88434802020000,노르웨이,ノルウェー,Noruega,Norvegia,Norway,นอร์เวย์,Norvège,Norveç,Noruega,Norwegen,NOR,252
+227,192,308c134902020000,폴란드,ポーランド,Polonia,Polonia,Poland,โปแลนด์,Pologne,Polonya,Polónia,Polen,POL,240
+228,193,3190233902020000,포르투갈,ポルトガル,Portugal,Portogallo,Portugal,โปรตุเกส,Portugal,Portekiz,Portugal,Portugal,POR,1073
+229,194,3294634902020000,루마니아,ルーマニア,Rumanía,Romania,Romania,โรมาเนีย,Roumanie,Romanya,Roménia,Rumänien,ROU,103
+230,195,3398734902020000,러시아,ロシア,Rusia,Russia,Russia,รัสเซีย,Russie,Rusya,Rússia,Russland,RUS,56
+231,196,349c1b4502020000,산마리노,サンマリノ,San Marino,San Marino,San Marino,ซานมารีโน,Saint-Marin,San Marino,San Marino,San Marino,SMR,0
+232,197,35a00b4002020000,스코틀랜드,スコットランド,Escocia,Scozia,Scotland,สกอตแลนด์,Écosse,İskoçya,Escócia,Schottland,SCO,436
+234,198,37a8db4902020000,슬로바키아,スロバキア,Eslovaquia,Slovacchia,Slovakia,สโลวาเกีย,Slovaquie,Slovakya,Eslováquia,Slowakei,SVK,84
+235,199,38ace34902020000,슬로베니아,スロベニア,Eslovenia,Slovenia,Slovenia,สโลวีเนีย,Slovénie,Slovenya,Eslovénia,Slowenien,SVN,95
+236,200,39b0534a02020000,스페인,スペイン,España,Spagna,Spain,สเปน,Espagne,İspanya,Espanha,Spanien,ESP,2889
+237,201,3bb4a34a02020000,스웨덴,スウェーデン,Suecia,Svezia,Sweden,สวีเดน,Suède,İsveç,Suécia,Schweden,SWE,270
+238,202,3cb8cb4302020000,스위스,スイス,Suiza,Svizzera,Switzerland,สวิตเซอร์แลนด์,Suisse,İsviçre,Suíça,Schweiz,SUI,518
+239,203,3ebcd34b02020000,우크라이나,ウクライナ,Ucrania,Ucraina,Ukraine,ยูเครน,Ukraine,Ukrayna,Ucrânia,Ukraine,UKR,138
+240,204,e6c0eb4b02130000,우즈베키스탄,ウズベキスタン,Uzbekistán,Uzbekistan,Uzbekistan,อุซเบกิสถาน,Ouzbékistan,Özbekistan,Uzbequistão,Usbekistan,UZB,250
+241,205,40c40b4002020000,웨일즈,ウェールズ,Gales,Galles,Wales,เวลส์,Pays de Galles,Galler,País de Gales,Wales,WAL,178
+245,206,18d40b2002020000,지브롤터,ジブラルタル,Gibraltar,Gibilterra,Gibraltar,ยิบรอลตาร์,Gibraltar,Cebelitarık,Gibraltar,Gibraltar,GIB,0
+250,207,2ae8933302020000,모나코,モナコ,Mónaco,Monaco,Monaco,โมนาโก,Monaco,Monako,Mónaco,Monaco,MON,1
+260,208,1311040000000000,기타,その他,Otros,Altri,Others,อื่นๆ,Autres,Diğerleri,Outros,Andere,OTH,18
+298,209,c2a8a45c010b0000,차이니스 타이페이,チャイニーズ・タイペイ,Taipéi Chino,Taipei cinese,Chinese Taipei,จีนไทเป,Taipei chinois,Çin Taipeisi,Taipé Chinesa,Chinesisch Taipeh,TPE,1
+303,210,36bca44902020000,세르비아,セルビア,Serbia,Serbia,Serbia,เซอร์เบีย,Serbie,Sırbistan,Sérvia,Serbien,SRB,282
+304,211,2bc0a42902020000,몬테네그로,モンテネグロ,Montenegro,Montenegro,Montenegro,มอนเตเนโกร,Monténégro,Karadağ,Montenegro,Montenegro,MNE,64
+311,212,23dc6c4002020000,코소보,コソボ,Kosovo,Kosovo,Kosovo,คอซอวอ,Kosovo,Kosova,Kosovo,Kosovo,KOS,93
+312,213,74e00c0003050000,남수단,南スーダン,Sudán del Sur,Sudan del Sud,South Sudan,ซูดานใต้,Soudan du Sud,Güney Sudan,Sudão do Sul,Südsudan,SSD,2

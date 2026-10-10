@@ -11,6 +11,7 @@ data/exports/*.partial.csv
 data/exports/*.recalc.partial.csv
 data/exports/*.levels.csv
 data/exports/*.pesdb.csv
+data/exports/*.xlsx
 data/google_oauth.env
 .env
 uploads/
